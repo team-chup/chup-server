@@ -61,7 +61,6 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // plz custom allowed client origins
         configuration.setAllowedOrigins(List.of("*"));
 
         configuration.setAllowedMethods(Arrays.asList(

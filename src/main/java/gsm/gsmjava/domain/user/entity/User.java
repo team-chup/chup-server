@@ -1,5 +1,6 @@
 package gsm.gsmjava.domain.user.entity;
 
+import gsm.gsmjava.domain.user.service.dto.req.SignUpReqDto;
 import gsm.gsmjava.domain.user.type.Authority;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,16 +19,16 @@ public class User {
     @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(100)")
     private String oauthEmail;
 
-    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(100)")
+    @Column(unique = true, columnDefinition = "VARCHAR(100)")
     private String email;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(30)")
+    @Column(columnDefinition = "VARCHAR(30)")
     private String name;
 
-    @Column(nullable = false, columnDefinition = "CHAR(4)")
+    @Column(columnDefinition = "CHAR(4)")
     private String studentNumber;
 
-    @Column(nullable = false, columnDefinition = "CHAR(11)")
+    @Column(columnDefinition = "CHAR(11)")
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
@@ -39,6 +40,14 @@ public class User {
                 .oauthEmail(oauthEmail)
                 .authority(Authority.TEMP)
                 .build();
+    }
+
+    public void signup(SignUpReqDto reqDto) {
+        this.email = reqDto.getEmail();
+        this.name = reqDto.getName();
+        this.studentNumber = reqDto.getStudentNumber();
+        this.phoneNumber = reqDto.getPhoneNumber();
+        this.authority = Authority.USER;
     }
 
 }

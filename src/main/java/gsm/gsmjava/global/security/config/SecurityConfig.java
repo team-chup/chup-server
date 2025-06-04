@@ -1,5 +1,6 @@
 package gsm.gsmjava.global.security.config;
 
+import gsm.gsmjava.domain.user.type.Authority;
 import gsm.gsmjava.global.filter.ExceptionHandlerFilter;
 import gsm.gsmjava.global.security.handler.CustomAccessDeniedHandler;
 import gsm.gsmjava.global.security.handler.CustomAuthenticationEntryPointHandler;
@@ -51,7 +52,12 @@ public class SecurityConfig {
         http.addFilterBefore(exceptionHandlerFilter, JwtReqFilter.class);
 
         http.authorizeHttpRequests(httpRequests -> httpRequests
-                .anyRequest().permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth/refresh").permitAll()
+
+                .requestMatchers(HttpMethod.POST, "/user/signup").hasAnyRole(Authority.TEMP.name())
+
+                .anyRequest().denyAll()
         );
 
         return http.build();

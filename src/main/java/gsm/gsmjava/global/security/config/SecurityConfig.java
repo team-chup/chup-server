@@ -22,6 +22,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static gsm.gsmjava.global.filter.JwtReqFilter.AUTHORIZATION_HEADER;
+import static gsm.gsmjava.global.filter.JwtReqFilter.REFRESHTOKEN_HEADER;
+
 
 @Configuration
 @RequiredArgsConstructor
@@ -81,8 +84,8 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("*"));
-        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://chup.today", "https://www.chup.today"));
+        configuration.setAllowedHeaders(List.of(AUTHORIZATION_HEADER, REFRESHTOKEN_HEADER));
 
         configuration.setAllowedMethods(Arrays.asList(
                 HttpMethod.GET.name(),

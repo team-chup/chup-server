@@ -5,6 +5,7 @@ import gsm.gsmjava.domain.auth.service.ReissueTokenService;
 import gsm.gsmjava.domain.auth.service.dto.req.LoginReqDto;
 import gsm.gsmjava.domain.auth.service.dto.res.AuthResDto;
 import gsm.gsmjava.global.security.jwt.dto.TokenDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResDto> login(
-            @RequestBody LoginReqDto reqDto
+            @RequestBody @Valid LoginReqDto reqDto
     ) {
         AuthResDto response = loginService.login(reqDto);
         return ResponseEntity.ok(response);

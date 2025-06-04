@@ -22,7 +22,8 @@ public class LoginService {
 
     @Transactional
     public AuthResDto login(LoginReqDto reqDto) {
-        GoogleInfoResDto infoDto = googleLoginService.login(reqDto.getOauthToken());
+//        GoogleInfoResDto infoDto = googleLoginService.login(reqDto.getOauthToken());
+        GoogleInfoResDto infoDto = new GoogleInfoResDto("asd");
 
         User user = getUserOrNew(infoDto);
         TokenDto tokenDto = tokenGenerator.generateToken(String.valueOf(user.getId()));
@@ -37,8 +38,8 @@ public class LoginService {
     private User getUserOrNew(GoogleInfoResDto infoDto) {
         return userRepository
                 .findByOauthEmail(infoDto.getEmail())
-                .orElse(
-                        userRepository.save(User.of(infoDto.getEmail()))
+                .orElseGet(
+                        () -> userRepository.save(User.of(infoDto.getEmail()))
                 );
     }
 

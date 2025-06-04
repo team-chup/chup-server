@@ -29,6 +29,11 @@ jobs:
             else
               git pull origin master
             fi
+          
+            mkdir -p ./src/main/resources
+            cat <<EOT > ./src/main/resources/application-prod.yml
+            ${{ secrets.PROD_YML }}
+            EOT
 
             ./gradlew clean build
 

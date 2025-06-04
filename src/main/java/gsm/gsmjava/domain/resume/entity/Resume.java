@@ -26,4 +26,9 @@ public class Resume {
     private ResumeType type;
 
     private String url;
+
+    public void update(ResumeType type, String url) {
+        this.type = type;
+        this.url = url;
+    }
 }

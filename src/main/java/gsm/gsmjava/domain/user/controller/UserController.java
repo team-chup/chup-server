@@ -1,7 +1,9 @@
 package gsm.gsmjava.domain.user.controller;
 
+import gsm.gsmjava.domain.resume.service.dto.req.ResumeReqDto;
 import gsm.gsmjava.domain.user.service.SingUpService;
 import gsm.gsmjava.domain.user.service.UpdateInfoService;
+import gsm.gsmjava.domain.user.service.UpdateResumeService;
 import gsm.gsmjava.domain.user.service.UserInfoService;
 import gsm.gsmjava.domain.user.service.dto.req.SignUpReqDto;
 import gsm.gsmjava.domain.user.service.dto.req.UpdateInfoReqDto;
@@ -18,6 +20,7 @@ public class UserController {
 
     private final SingUpService singUpService;
     private final UpdateInfoService updateInfoService;
+    private final UpdateResumeService updateResumeService;
     private final UserInfoService userInfoService;
 
     @PostMapping("/signup")
@@ -40,6 +43,14 @@ public class UserController {
     public ResponseEntity<UserInfoResDto> info() {
         UserInfoResDto response = userInfoService.getInfo();
         return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/me/resume")
+    public ResponseEntity<Void> updateResume(
+            @RequestBody @Valid ResumeReqDto reqDto
+    ) {
+        updateResumeService.update(reqDto);
+        return ResponseEntity.ok().build();
     }
 
 }

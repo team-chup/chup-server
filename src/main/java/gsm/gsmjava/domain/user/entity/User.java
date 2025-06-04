@@ -1,5 +1,6 @@
 package gsm.gsmjava.domain.user.entity;
 
+import gsm.gsmjava.domain.resume.entity.Resume;
 import gsm.gsmjava.domain.user.service.dto.req.SignUpReqDto;
 import gsm.gsmjava.domain.user.type.Authority;
 import jakarta.persistence.*;
@@ -30,6 +31,9 @@ public class User {
 
     @Column(columnDefinition = "CHAR(11)")
     private String phoneNumber;
+
+    @OneToOne(mappedBy = "user")
+    private Resume resume;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "authority")

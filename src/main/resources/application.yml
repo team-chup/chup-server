@@ -34,3 +34,7 @@ jwt:
   refreshSecret: ${REFRESH_SECRET}
   accessExp: ${ACCESS_EXP}
   refreshExp: ${REFRESH_EXP}
+
+oauth:
+  google:
+    info-url: https://www.googleapis.com

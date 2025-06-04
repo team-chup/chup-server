@@ -33,4 +33,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "authority")
     private Authority authority = Authority.TEMP;
+
+    public static User of(String oauthEmail) {
+        return User.builder()
+                .oauthEmail(oauthEmail)
+                .authority(Authority.TEMP)
+                .build();
+    }
+
 }

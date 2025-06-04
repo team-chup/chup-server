@@ -43,6 +43,7 @@ public class Application {
 
     private String applicantStudentNumber;
 
+    @Enumerated(EnumType.STRING)
     private ResumeType applicantResumeType;
 
     private String applicantResumeUrl;

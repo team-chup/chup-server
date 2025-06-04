@@ -1,0 +1,59 @@
+name: CHUP Prod CD Workflow
+
+on:
+  push:
+    branches:
+      - 'master'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install sshpass and OpenSSH
+        run: |
+          sudo apt-get update && sudo apt-get install -y sshpass openssh-client
+
+      - name: SSH into Target and Deploy CHUP
+        run: |
+          sshpass -p "${{ secrets.CHUP_PROD_TARGET_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.CHUP_PROD_TARGET_USER }}@${{ secrets.CHUP_PROD_TARGET_HOST }} -p 10004 << 'EOF'
+            mkdir -p ~/chup
+            cd ~/chup
+
+            if [ ! -d ".git" ]; then
+              git clone -b master https://github.com/team-chup/chup-server .
+            else
+              git pull origin master
+            fi
+
+            ./gradlew clean build
+
+            docker build -f Dockerfile -t chup-prod .
+
+            docker stop chup-prod || true
+            docker rm chup-prod || true
+
+            docker run -d -p 10005:8080 --add-host host.docker.internal:host-gateway --name chup-prod chup-prod
+          EOF
+
+      - name: SSH Success Notification
+        if: success()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          color: 0x148EFF
+          title: "CHUP 배포 성공 🎉"
+          message: "배포되었습니다."
+
+      - name: SSH Failure Notification
+        if: failure()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          color: 0xFF4C4C
+          title: "CHUP 배포 실패 ❌"
+          message: "배포에 실패했습니다."

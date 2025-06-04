@@ -20,11 +20,11 @@ public class PostingPosition {
     @Column(name = "user_id", nullable = false)
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "posting_id", nullable = false)
-    private List<Posting> postings = List.of();
+    private Posting posting;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id", nullable = false)
-    private List<Position> positions = List.of();
+    private Position position;
 }

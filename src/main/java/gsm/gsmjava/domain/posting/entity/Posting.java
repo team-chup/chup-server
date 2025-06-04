@@ -2,6 +2,7 @@ package gsm.gsmjava.domain.posting.entity;
 
 import gsm.gsmjava.domain.posting.type.CompanyLocation;
 import gsm.gsmjava.domain.posting.type.EmploymentType;
+import gsm.gsmjava.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,10 @@ public class Posting {
     @Column(name = "user_id", nullable = false)
     private Long id;
 
+    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
     private String companyName;
 
     private String companyDescription;
@@ -34,7 +39,7 @@ public class Posting {
 
     private LocalDateTime postingEndAt;
 
-    private Integer applicationCount;
+    private Integer applicationCount = 0;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

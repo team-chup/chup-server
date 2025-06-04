@@ -2,6 +2,7 @@ package gsm.gsmjava.domain.user.entity;
 
 import gsm.gsmjava.domain.resume.entity.Resume;
 import gsm.gsmjava.domain.user.service.dto.req.SignUpReqDto;
+import gsm.gsmjava.domain.user.service.dto.req.UpdateInfoReqDto;
 import gsm.gsmjava.domain.user.type.Authority;
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,6 +45,13 @@ public class User {
                 .oauthEmail(oauthEmail)
                 .authority(Authority.TEMP)
                 .build();
+    }
+
+    public void update(UpdateInfoReqDto reqDto) {
+        this.email = reqDto.getEmail();
+        this.name = reqDto.getName();
+        this.studentNumber = reqDto.getStudentNumber();
+        this.phoneNumber = reqDto.getPhoneNumber();
     }
 
     public void signup(SignUpReqDto reqDto) {

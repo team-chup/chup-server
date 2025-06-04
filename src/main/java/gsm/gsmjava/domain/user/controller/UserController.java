@@ -1,8 +1,10 @@
 package gsm.gsmjava.domain.user.controller;
 
 import gsm.gsmjava.domain.user.service.SingUpService;
+import gsm.gsmjava.domain.user.service.UpdateInfoService;
 import gsm.gsmjava.domain.user.service.UserInfoService;
 import gsm.gsmjava.domain.user.service.dto.req.SignUpReqDto;
+import gsm.gsmjava.domain.user.service.dto.req.UpdateInfoReqDto;
 import gsm.gsmjava.domain.user.service.dto.res.UserInfoResDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final SingUpService singUpService;
+    private final UpdateInfoService updateInfoService;
     private final UserInfoService userInfoService;
 
     @PostMapping("/signup")
@@ -22,6 +25,14 @@ public class UserController {
         @RequestBody @Valid SignUpReqDto reqDto
     ) {
         singUpService.signup(reqDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/me")
+    public ResponseEntity<Void> update(
+            @RequestBody @Valid UpdateInfoReqDto reqDto
+    ) {
+        updateInfoService.update(reqDto);
         return ResponseEntity.ok().build();
     }
 

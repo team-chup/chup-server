@@ -2,6 +2,7 @@ package gsm.gsmjava.global.security.config;
 
 import gsm.gsmjava.domain.user.type.Authority;
 import gsm.gsmjava.global.filter.ExceptionHandlerFilter;
+import gsm.gsmjava.global.filter.LoggingFilter;
 import gsm.gsmjava.global.security.handler.CustomAccessDeniedHandler;
 import gsm.gsmjava.global.security.handler.CustomAuthenticationEntryPointHandler;
 import gsm.gsmjava.global.filter.JwtReqFilter;
@@ -30,6 +31,7 @@ public class SecurityConfig {
     private final CustomAuthenticationEntryPointHandler authenticationEntryPoint;
     private final JwtReqFilter jwtReqFilter;
     private final ExceptionHandlerFilter exceptionHandlerFilter;
+    private final LoggingFilter loggingFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -50,6 +52,7 @@ public class SecurityConfig {
 
         http.addFilterBefore(jwtReqFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(exceptionHandlerFilter, JwtReqFilter.class);
+        http.addFilterBefore(loggingFilter, ExceptionHandlerFilter.class);
 
         http.authorizeHttpRequests(httpRequests -> httpRequests
                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()

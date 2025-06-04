@@ -30,6 +30,8 @@ jobs:
               git pull origin master
             fi
           
+            rm -f ./src/main/resources/application.yml
+          
             mkdir -p ./src/main/resources
             cat <<EOT > ./src/main/resources/application-prod.yml
             ${{ secrets.PROD_YML }}

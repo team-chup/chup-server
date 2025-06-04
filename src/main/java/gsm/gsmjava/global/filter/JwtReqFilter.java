@@ -19,8 +19,9 @@ public class JwtReqFilter extends OncePerRequestFilter {
 
     private final TokenParser tokenParser;
 
-    public static String AUTHORIZATION_HEADER = "Authorization";
-    public static String BEARER_PREFIX = "Bearer ";
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String REFRESHTOKEN_HEADER = "RefreshToken";
+    public static final String BEARER_PREFIX = "Bearer ";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

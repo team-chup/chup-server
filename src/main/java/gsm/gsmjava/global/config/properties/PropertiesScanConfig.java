@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationPropertiesScan(basePackages = {
         "gsm.gsmjava.infra.s3.properties",
-        "gsm.gsmjava.global.security.jwt.properties"})
+        "gsm.gsmjava.global.security.jwt.properties",
+        "gsm.gsmjava.infra.discord.properties"})
 public class PropertiesScanConfig {
 }

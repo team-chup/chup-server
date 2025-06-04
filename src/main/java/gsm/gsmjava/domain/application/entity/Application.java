@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)

@@ -2,6 +2,7 @@ package gsm.gsmjava.domain.posting.controller;
 
 import gsm.gsmjava.domain.posting.service.CreatePostingService;
 import gsm.gsmjava.domain.posting.service.dto.req.CreatePostingReqDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class PostingController {
 
     @PostMapping
     public ResponseEntity<Void> create(
-        @RequestBody CreatePostingReqDto reqDto
+        @RequestBody @Valid CreatePostingReqDto reqDto
     ) {
         createPostingService.create(reqDto);
         return new ResponseEntity<>(HttpStatus.CREATED);

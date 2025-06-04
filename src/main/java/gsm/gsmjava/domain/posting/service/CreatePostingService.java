@@ -3,6 +3,7 @@ package gsm.gsmjava.domain.posting.service;
 import gsm.gsmjava.domain.position.entity.Position;
 import gsm.gsmjava.domain.position.repository.PositionRepository;
 import gsm.gsmjava.domain.posting.entity.Posting;
+import gsm.gsmjava.domain.posting.event.CreatePostingEvent;
 import gsm.gsmjava.domain.posting.repository.PostingRepository;
 import gsm.gsmjava.domain.posting.service.dto.req.CreatePostingReqDto;
 import gsm.gsmjava.domain.postingfile.entity.PostingFile;
@@ -13,6 +14,7 @@ import gsm.gsmjava.domain.user.entity.User;
 import gsm.gsmjava.global.error.ExpectedException;
 import gsm.gsmjava.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,7 @@ public class CreatePostingService {
     private final PostingPositionRepository postingPositionRepository;
     private final PostingFileRepository postingFileRepository;
     private final PostingRepository postingRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
     public void create(CreatePostingReqDto reqDto) {
@@ -61,11 +64,29 @@ public class CreatePostingService {
         List<PostingFile> postingFiles = reqDto.getFiles().stream()
             .map(file ->
                     PostingFile.builder()
+                            .posting(newPosting)
                             .name(file.getName())
                             .url(file.getUrl())
                             .build()
             ).toList();
         postingFileRepository.saveAll(postingFiles);
+
+        applicationEventPublisher.publishEvent(
+            CreatePostingEvent.builder()
+                .postingId(newPosting.getId())
+                .companyName(reqDto.getCompanyName())
+                .companyDescription(
+                    reqDto.getCompanyDescription().substring(
+                        0, Math.min(100, reqDto.getCompanyDescription().length())
+                    )
+                )
+                .companyLocation(reqDto.getCompanyLocation())
+                .employmentType(reqDto.getEmploymentType())
+                .positions(positions.stream().map(Position::getName).toList())
+                .startAt(reqDto.getStartAt())
+                .endAt(reqDto.getEndAt())
+                .build()
+        );
     }
 
 }

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Posting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @JoinColumn(name = "user_id", nullable = false)

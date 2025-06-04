@@ -3,7 +3,7 @@ package gsm.gsmjava.domain.auth.service;
 import gsm.gsmjava.domain.auth.entity.RefreshToken;
 import gsm.gsmjava.domain.auth.repository.RefreshTokenRepository;
 import gsm.gsmjava.domain.user.repository.UserRepository;
-import gsm.gsmjava.global.error.GlobalException;
+import gsm.gsmjava.global.error.ExpectedException;
 import gsm.gsmjava.global.security.jwt.TokenGenerator;
 import gsm.gsmjava.global.security.jwt.dto.TokenDto;
 import gsm.gsmjava.global.security.jwt.properties.JwtEnvironment;
@@ -29,7 +29,7 @@ public class ReissueTokenService {
 
         String removePrefixToken = token.replaceFirst(BEARER_PREFIX, "").trim();
         RefreshToken refreshToken = refreshTokenRepository.findByToken(removePrefixToken)
-                .orElseThrow(() -> new GlobalException("존재하지 않는 refresh token 입니다.", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ExpectedException("존재하지 않는 refresh token 입니다.", HttpStatus.NOT_FOUND));
 
         String userId = tokenGenerator.getUserIdFromRefreshToken(refreshToken.getToken());
         isExistsUser(userId);
@@ -41,12 +41,12 @@ public class ReissueTokenService {
 
     private void isNotNullRefreshToken(String token) {
         if (token == null)
-            throw new GlobalException("refresh token을 요청 헤더에 포함시켜 주세요.", HttpStatus.BAD_REQUEST);
+            throw new ExpectedException("refresh token을 요청 헤더에 포함시켜 주세요.", HttpStatus.BAD_REQUEST);
     }
 
     private void isExistsUser(String userId) {
         if (!userRepository.existsById(Long.valueOf(userId)))
-            throw new GlobalException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
+            throw new ExpectedException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
     }
 
     private void saveNewRefreshToken(String token, Long userId) {

@@ -2,7 +2,7 @@ package gsm.gsmjava.global.security.auth;
 
 import gsm.gsmjava.domain.user.entity.User;
 import gsm.gsmjava.domain.user.repository.UserRepository;
-import gsm.gsmjava.global.error.GlobalException;
+import gsm.gsmjava.global.error.ExpectedException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,9 +19,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+    public UserDetails  loadUserByUsername(String userId) throws UsernameNotFoundException {
         User user = userRepository.findById(Long.valueOf(userId))
-                .orElseThrow(() -> new GlobalException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ExpectedException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND));
 
         return new CustomUserDetails(user);
     }

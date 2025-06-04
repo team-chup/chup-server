@@ -29,6 +29,24 @@ spring:
     init:
       mode: always
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  cloud:
+    aws:
+      s3:
+        bucketName: ${BUCKET_NAME}
+      credentials:
+        access-key: ${ACCESS_KEY}
+        secret-key: ${SECRET_KEY}
+      region:
+        static: ap-northeast-2
+        auto: false
+      stack:
+        auto: false
+
 jwt:
   accessSecret: ${ACCESS_SECRET}
   refreshSecret: ${REFRESH_SECRET}

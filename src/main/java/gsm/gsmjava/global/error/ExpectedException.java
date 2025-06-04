@@ -2,7 +2,7 @@ package gsm.gsmjava.global.error;
 
 import org.springframework.http.HttpStatus;
 
-public class GlobalException extends RuntimeException {
+public class ExpectedException extends RuntimeException {
 
     private final HttpStatus httpStatus;
 
@@ -10,12 +10,12 @@ public class GlobalException extends RuntimeException {
         return httpStatus;
     }
 
-    public GlobalException(String message, HttpStatus httpStatus) {
+    public ExpectedException(String message, HttpStatus httpStatus) {
         super(message);
         this.httpStatus = httpStatus;
     }
 
-    public GlobalException(HttpStatus httpStatus) {
+    public ExpectedException(HttpStatus httpStatus) {
         super(httpStatus.getReasonPhrase());
         this.httpStatus = httpStatus;
     }

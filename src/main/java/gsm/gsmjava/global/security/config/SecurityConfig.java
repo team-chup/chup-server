@@ -55,7 +55,10 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/refresh").permitAll()
 
-                .requestMatchers(HttpMethod.POST, "/user/signup").hasAnyRole(Authority.TEMP.name())
+                .requestMatchers(HttpMethod.POST, "/user/signup").hasAnyAuthority(Authority.TEMP.name())
+
+                .requestMatchers(HttpMethod.POST, "/file/resume").hasAnyAuthority(Authority.TEMP.name(), Authority.USER.name())
+                .requestMatchers(HttpMethod.POST, "/file/posting").hasAnyAuthority(Authority.TEACHER.name())
 
                 .anyRequest().denyAll()
         );

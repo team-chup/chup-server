@@ -17,10 +17,10 @@ import java.util.Map;
 @Slf4j
 @EnableWebMvc
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class ExpectedExceptionHandler {
 
-    @ExceptionHandler(GlobalException.class)
-    private ResponseEntity<ErrorResponse> expectedException(GlobalException ex) {
+    @ExceptionHandler(ExpectedException.class)
+    private ResponseEntity<ErrorResponse> expectedException(ExpectedException ex) {
         log.warn("ExpectedException : {} ", ex.getMessage());
         log.trace("ExpectedException Details : ", ex);
         return ResponseEntity.status(ex.getHttpStatus().value()).body(ErrorResponse.of(ex));

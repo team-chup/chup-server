@@ -1,6 +1,6 @@
-package gsm.gsmjava.infra.client;
+package gsm.gsmjava.infra.feign.client;
 
-import gsm.gsmjava.infra.dto.GoogleInfoResDto;
+import gsm.gsmjava.infra.feign.dto.GoogleInfoResDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;

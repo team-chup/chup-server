@@ -2,7 +2,7 @@ package gsm.gsmjava.global.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gsm.gsmjava.global.error.ErrorResponse;
-import gsm.gsmjava.global.error.GlobalException;
+import gsm.gsmjava.global.error.ExpectedException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -31,7 +31,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
             exceptionToResponse("만료된 JWT 토큰 입니다.", HttpStatus.UNAUTHORIZED, response);
         } catch (JwtException e) {
             exceptionToResponse("유효하지 않은 JWT 토큰 입니다.", HttpStatus.UNAUTHORIZED, response);
-        } catch (GlobalException e) {
+        } catch (ExpectedException e) {
             exceptionToResponse(e.getMessage(), e.getHttpStatus(), response);
         }
     }

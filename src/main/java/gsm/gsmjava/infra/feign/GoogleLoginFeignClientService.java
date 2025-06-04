@@ -1,7 +1,7 @@
-package gsm.gsmjava.infra;
+package gsm.gsmjava.infra.feign;
 
-import gsm.gsmjava.infra.client.GoogleOauthInfoFeignClient;
-import gsm.gsmjava.infra.dto.GoogleInfoResDto;
+import gsm.gsmjava.infra.feign.client.GoogleOauthInfoFeignClient;
+import gsm.gsmjava.infra.feign.dto.GoogleInfoResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

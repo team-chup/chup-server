@@ -2,7 +2,7 @@ package gsm.gsmjava.global.util;
 
 import gsm.gsmjava.domain.user.entity.User;
 import gsm.gsmjava.domain.user.repository.UserRepository;
-import gsm.gsmjava.global.error.GlobalException;
+import gsm.gsmjava.global.error.ExpectedException;
 import gsm.gsmjava.global.security.auth.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,9 +21,9 @@ public class UserUtil {
         if (principal instanceof CustomUserDetails) {
             String userId = ((CustomUserDetails) principal).getUsername();
             return userRepository.findById(Long.valueOf(userId))
-                    .orElseThrow(() -> new GlobalException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND));
+                    .orElseThrow(() -> new ExpectedException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND));
         } else {
-            throw new GlobalException("현재 인증되어 있는 유저의 principal이 유효하지 않습니다.", HttpStatus.UNAUTHORIZED);
+            throw new ExpectedException("현재 인증되어 있는 유저의 principal이 유효하지 않습니다.", HttpStatus.UNAUTHORIZED);
         }
     }
 

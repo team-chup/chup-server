@@ -55,6 +55,7 @@ public class SecurityConfig {
         http.addFilterBefore(loggingFilter, ExceptionHandlerFilter.class);
 
         http.authorizeHttpRequests(httpRequests -> httpRequests
+
                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/refresh").permitAll()
 
@@ -67,6 +68,8 @@ public class SecurityConfig {
 
                 .requestMatchers(HttpMethod.POST, "/file/resume").hasAnyAuthority(Authority.TEMP.name(), Authority.USER.name())
                 .requestMatchers(HttpMethod.POST, "/file/posting").hasAnyAuthority(Authority.TEACHER.name())
+
+                .requestMatchers(HttpMethod.GET, "/health").permitAll()
 
                 .anyRequest().denyAll()
         );

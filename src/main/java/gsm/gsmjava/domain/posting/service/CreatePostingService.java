@@ -14,6 +14,7 @@ import gsm.gsmjava.domain.user.entity.User;
 import gsm.gsmjava.global.error.ExpectedException;
 import gsm.gsmjava.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static gsm.gsmjava.global.cache.CacheConstant.POSTING_LIST_CACHE;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +37,7 @@ public class CreatePostingService {
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
+    @CacheEvict(value = POSTING_LIST_CACHE, cacheManager = "cacheManager")
     public void create(CreatePostingReqDto reqDto) {
         if (reqDto.getFiles().size() > 5) {
             throw new ExpectedException("최대 5개의 파일만 업로드할 수 있습니다.", HttpStatus.BAD_REQUEST);

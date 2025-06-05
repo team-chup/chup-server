@@ -68,6 +68,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PATCH, "/user/me/resume").hasAnyAuthority(Authority.USER.name())
 
                 .requestMatchers(HttpMethod.POST, "/posting").hasAnyAuthority(Authority.TEACHER.name())
+                .requestMatchers(HttpMethod.GET, "/posting").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
 
                 .requestMatchers(HttpMethod.POST, "/file/resume").hasAnyAuthority(Authority.TEMP.name(), Authority.USER.name())
                 .requestMatchers(HttpMethod.POST, "/file/posting").hasAnyAuthority(Authority.TEACHER.name())

@@ -2,11 +2,13 @@ package gsm.gsmjava.domain.posting.entity;
 
 import gsm.gsmjava.domain.posting.type.CompanyLocation;
 import gsm.gsmjava.domain.posting.type.EmploymentType;
+import gsm.gsmjava.domain.postingposition.entity.PostingPosition;
 import gsm.gsmjava.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_posting")
@@ -24,6 +26,9 @@ public class Posting {
     @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
+    @OneToMany(mappedBy = "posting")
+    private List<PostingPosition> postingPositions;
 
     private String companyName;
 

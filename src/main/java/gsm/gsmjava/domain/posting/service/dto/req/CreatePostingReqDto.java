@@ -36,7 +36,9 @@ public class CreatePostingReqDto {
     @Builder
     @AllArgsConstructor
     public static class PostingFile {
+        @NotBlank
         private String name;
+        @NotBlank
         private String url;
     }
 }

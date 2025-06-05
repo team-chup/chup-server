@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -48,6 +49,8 @@ public class CreatePostingService {
                 .employmentType(reqDto.getEmploymentType())
                 .postingStartAt(reqDto.getStartAt())
                 .postingEndAt(reqDto.getEndAt())
+                .createdAt(LocalDateTime.now())
+                .applicationCount(0)
                 .build();
         Posting newPosting = postingRepository.save(posting);
 

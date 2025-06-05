@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface PostingRepository extends JpaRepository<Posting, Long> {
     @Query("SELECT pg FROM Posting pg " +
-            "JOIN FETCH PostingPosition pp " +
-            "JOIN FETCH Position pn " +
+            "JOIN FETCH pg.postingPositions pp " +
+            "JOIN FETCH pp.position pn " +
             "WHERE pg.postingEndAt > :now " +
             "ORDER BY pg.createdAt DESC")
     List<Posting> queryNotEnd(LocalDateTime now);

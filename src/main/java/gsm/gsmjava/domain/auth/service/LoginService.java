@@ -22,7 +22,8 @@ public class LoginService {
 
     @Transactional
     public AuthResDto login(LoginReqDto reqDto) {
-        GoogleInfoResDto infoDto = googleLoginService.login(reqDto.getOauthToken());
+//        GoogleInfoResDto infoDto = googleLoginService.login(reqDto.getOauthToken());
+        GoogleInfoResDto infoDto = new GoogleInfoResDto("asd");
 
         User user = getUserOrNew(infoDto);
         TokenDto tokenDto = tokenGenerator.generateToken(String.valueOf(user.getId()));

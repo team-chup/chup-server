@@ -5,12 +5,14 @@ import gsm.gsmjava.domain.posting.type.EmploymentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class QueryPostingResDto {
     private Integer count;
@@ -18,6 +20,7 @@ public class QueryPostingResDto {
 
     @Getter
     @Builder
+    @NoArgsConstructor
     @AllArgsConstructor
     public static class PostingDto {
         private Long id;
@@ -33,6 +36,7 @@ public class QueryPostingResDto {
 
     @Getter
     @Builder
+    @NoArgsConstructor
     @AllArgsConstructor
     public static class PositionDto {
         private Long id;

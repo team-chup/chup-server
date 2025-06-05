@@ -3,7 +3,7 @@ package gsm.gsmjava.domain.application.service;
 import gsm.gsmjava.domain.application.entity.Application;
 import gsm.gsmjava.domain.application.repository.ApplicationRepository;
 import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto;
-import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.ApplicationDto;
+import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.MyApplicationDto;
 import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.PositionDto;
 import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.ResultDto;
 import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.ResumeDto;
@@ -25,9 +25,9 @@ public class QueryMyApplicationService {
     @Transactional(readOnly = true)
     public MyApplicationResDto queryMy() {
         User currentUser = userUtil.getCurrentUser();
-        List<Application> applications = applicationRepository.findByUser(currentUser);
+        List<Application> applications = applicationRepository.findByUserFetchJoin(currentUser);
 
-        List<ApplicationDto> applicationDtos = applications.stream().map(application -> ApplicationDto.builder()
+        List<MyApplicationDto> applicationDtoes = applications.stream().map(application -> MyApplicationDto.builder()
                 .postingId(application.getPosting().getId())
                 .companyName(application.getPosting().getCompanyName())
                 .companyLocation(application.getPosting().getCompanyLocation())
@@ -47,11 +47,13 @@ public class QueryMyApplicationService {
                         .failedReason(application.getApplicationResult().getApplicationFailedReason())
                         .announcedAt(application.getApplicationResult().getCreatedAt())
                         .build())
+                .startAt(application.getPosting().getPostingStartAt())
+                .endAt(application.getPosting().getPostingEndAt())
                 .createdAt(application.getCreatedAt())
                 .build()
         ).toList();
 
-        return new MyApplicationResDto(applications.size(), applicationDtos);
+        return new MyApplicationResDto(applications.size(), applicationDtoes);
     }
 
 }

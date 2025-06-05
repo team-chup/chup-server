@@ -17,12 +17,12 @@ import java.util.List;
 @AllArgsConstructor
 public class MyApplicationResDto {
     private Integer count;
-    private List<ApplicationDto> applications;
+    private List<MyApplicationDto> applications;
 
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class ApplicationDto {
+    public static class MyApplicationDto {
         private Long postingId;
         private String companyName;
         private CompanyLocation companyLocation;
@@ -32,6 +32,8 @@ public class MyApplicationResDto {
         private ResumeDto resume;
         private ResultDto result;
         private LocalDateTime createdAt;
+        private LocalDateTime startAt;
+        private LocalDateTime endAt;
     }
 
     @Getter

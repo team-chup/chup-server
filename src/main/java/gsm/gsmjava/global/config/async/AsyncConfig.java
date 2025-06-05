@@ -19,13 +19,13 @@ public class AsyncConfig implements AsyncConfigurer {
     private final GlobalAsyncExceptionHandler globalAsyncExceptionHandler;
 
     @Override
-    @Bean(name = "discordWebHookTaskExecutor")
+    @Bean(name = "asyncTaskExecutor")
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(1);
         executor.setQueueCapacity(Integer.MAX_VALUE);
         executor.setMaxPoolSize(Integer.MAX_VALUE);
-        executor.setThreadNamePrefix("Discord-Task");
+        executor.setThreadNamePrefix("Async-Task");
         executor.initialize();
         return executor;
     }

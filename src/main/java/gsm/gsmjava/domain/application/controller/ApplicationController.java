@@ -2,6 +2,7 @@ package gsm.gsmjava.domain.application.controller;
 
 import gsm.gsmjava.domain.application.service.ApplyService;
 import gsm.gsmjava.domain.application.service.dto.req.ApplyReqDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +15,12 @@ public class ApplicationController {
 
     private final ApplyService applyService;
 
-    @PostMapping("/{positing_id}")
+    @PostMapping("/apply/{posting_id}")
     public ResponseEntity<Void> apply(
-            @PathVariable("positing_id") Long positionId,
-            @RequestBody ApplyReqDto reqDto
+            @PathVariable("posting_id") Long postingId,
+            @RequestBody @Valid ApplyReqDto reqDto
         ) {
-        applyService.apply(positionId, reqDto);
+        applyService.apply(postingId, reqDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

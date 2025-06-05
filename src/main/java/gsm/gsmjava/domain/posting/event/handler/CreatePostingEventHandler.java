@@ -25,7 +25,7 @@ public class CreatePostingEventHandler {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
 
-    @Async("discordWebHookTaskExecutor")
+    @Async("asyncTaskExecutor")
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void handle(CreatePostingEvent event) {
         String webhookUrl = discordEnv.webhookUrl();

@@ -49,6 +49,7 @@ public class CreatePostingService {
                 .employmentType(reqDto.getEmploymentType())
                 .postingStartAt(reqDto.getStartAt())
                 .postingEndAt(reqDto.getEndAt())
+                .updatedAt(LocalDateTime.now())
                 .createdAt(LocalDateTime.now())
                 .applicationCount(0)
                 .build();

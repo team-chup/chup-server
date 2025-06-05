@@ -47,4 +47,10 @@ public class Posting {
     private Integer applicationCount = 0;
 
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    private LocalDateTime updatedAt = LocalDateTime.now();
+
+    public void add() {
+        this.applicationCount++;
+    }
 }

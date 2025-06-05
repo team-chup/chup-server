@@ -23,7 +23,7 @@ public class QueryPostingService {
     @Cacheable(value = POSTING_LIST_CACHE, cacheManager = "cacheManager")
     public QueryPostingResDto queryAll() {
         LocalDateTime now = LocalDateTime.now();
-        List<Posting> postings = postingRepository.queryNotEnd(now);
+        List<Posting> postings = postingRepository.queryNotEndFetchJoin(now);
 
         return QueryPostingResDto.builder()
                 .count(postings.size())

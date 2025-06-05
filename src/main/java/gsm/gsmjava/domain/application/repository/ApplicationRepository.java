@@ -20,4 +20,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 
     @Query("SELECT a FROM Application a JOIN FETCH a.position pn JOIN FETCH a.posting pg LEFT OUTER JOIN a.applicationResult ar WHERE a.posting = :posting ORDER BY a.createdAt DESC")
     List<Application> findByPostingFetchJoin(Posting posting);
+
+    @Query("SELECT a FROM Application a WHERE a.id IN (:ids) AND a.posting.id = :postingId ORDER BY a.createdAt DESC")
+    List<Application> findByPostingIdAndIds(Long postingId, List<Long> ids);
 }

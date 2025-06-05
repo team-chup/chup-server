@@ -78,6 +78,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/application/me").hasAnyAuthority(Authority.USER.name())
                 .requestMatchers(HttpMethod.GET, "/application/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
                 .requestMatchers(HttpMethod.POST, "/application/announce/{application_id}").hasAnyAuthority(Authority.TEACHER.name())
+                .requestMatchers(HttpMethod.GET, "/application/download/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
 
                 .requestMatchers(HttpMethod.POST, "/file/resume").hasAnyAuthority(Authority.TEMP.name(), Authority.USER.name())
                 .requestMatchers(HttpMethod.POST, "/file/posting").hasAnyAuthority(Authority.TEACHER.name())

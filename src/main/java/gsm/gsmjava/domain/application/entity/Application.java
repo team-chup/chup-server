@@ -58,4 +58,8 @@ public class Application {
     private ApplicationStatus applicantStatus;
 
     private LocalDateTime createdAt;
+
+    public void announced() {
+        this.applicantStatus = ApplicationStatus.ANNOUNCED;
+    }
 }

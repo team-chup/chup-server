@@ -23,6 +23,7 @@ public class MyApplicationResDto {
     @Builder
     @AllArgsConstructor
     public static class MyApplicationDto {
+        private Long id;
         private Long postingId;
         private String companyName;
         private CompanyLocation companyLocation;

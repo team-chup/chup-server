@@ -1,8 +1,10 @@
 package gsm.gsmjava.domain.application.controller;
 
+import gsm.gsmjava.domain.application.service.AnnounceResultService;
 import gsm.gsmjava.domain.application.service.ApplyService;
 import gsm.gsmjava.domain.application.service.QueryApplicationService;
 import gsm.gsmjava.domain.application.service.QueryMyApplicationService;
+import gsm.gsmjava.domain.application.service.dto.req.AnnounceReqDto;
 import gsm.gsmjava.domain.application.service.dto.req.ApplyReqDto;
 import gsm.gsmjava.domain.application.service.dto.res.ApplicationResDto;
 import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto;
@@ -20,6 +22,7 @@ public class ApplicationController {
     private final ApplyService applyService;
     private final QueryMyApplicationService queryMyApplicationService;
     private final QueryApplicationService queryApplicationService;
+    private final AnnounceResultService announceResultService;
 
     @PostMapping("/apply/{posting_id}")
     public ResponseEntity<Void> apply(
@@ -42,6 +45,15 @@ public class ApplicationController {
     ) {
         ApplicationResDto response = queryApplicationService.queryByPosting(postingId);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/announce/{application_id}")
+    public ResponseEntity<Void> announce(
+            @PathVariable("application_id") Long applicationId,
+            @RequestBody @Valid AnnounceReqDto reqDto
+    ) {
+        announceResultService.announce(applicationId, reqDto);
+        return ResponseEntity.ok().build();
     }
 
 }

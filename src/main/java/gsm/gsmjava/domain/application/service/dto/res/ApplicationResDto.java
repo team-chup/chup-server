@@ -32,13 +32,12 @@ public class ApplicationResDto {
     @Builder
     @AllArgsConstructor
     public static class ApplicationDto {
+        private Long id;
         private ApplicantDto applicant;
         private PositionDto position;
         private ApplicationStatus status;
         private ResumeDto resume;
         private ResultDto result;
         private LocalDateTime createdAt;
-        private LocalDateTime startAt;
-        private LocalDateTime endAt;
     }
 }

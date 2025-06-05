@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>서류 전형 결과 안내</title>
+</head>
+<body style="font-family: 'Apple SD Gothic Neo', sans-serif; background-color: #f9f9f9; padding: 40px;">
+<table width="100%" style="max-width: 600px; margin: auto; background-color: white; padding: 32px; border-radius: 10px;">
+    <tr>
+        <td style="text-align: center;">
+            <h2>{{name}} 님, {{company}} {{position}} 포지션 전형 결과 안내</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-top: 20px;">
+            <p>
+                안녕하세요, {{company}} 채용팀입니다.<br><br>
+                {{name}} 님께서 지원하신 <strong>{{position}}</strong> 포지션에 대한 전형 결과를 안내드립니다.<br><br>
+                안타깝게도 이번에는 함께 하게 되지 못하게 되었습니다.<br>
+            </p>
+            {{#ifReason}}
+            <p style="margin-top: 10px; font-style: italic;">
+                📌 불합격 사유: {{reason}}
+            </p>
+            {{/ifReason}}
+            <p style="margin-top: 20px;">
+                소중한 시간 내어 지원해주신 점 진심으로 감사드립니다.<br>
+                {{company}}는 앞으로도 {{name}} 님의 멋진 커리어를 응원하겠습니다.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-top: 30px; font-size: 12px; color: #999; text-align: center;">
+            © CHUP. All rights reserved.
+        </td>
+    </tr>
+</table>
+</body>
+</html>

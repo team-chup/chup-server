@@ -28,6 +28,7 @@ public class QueryMyApplicationService {
         List<Application> applications = applicationRepository.findByUserFetchJoin(currentUser);
 
         List<MyApplicationDto> applicationDtoes = applications.stream().map(application -> MyApplicationDto.builder()
+                .id(application.getId())
                 .postingId(application.getPosting().getId())
                 .companyName(application.getPosting().getCompanyName())
                 .companyLocation(application.getPosting().getCompanyLocation())
@@ -42,7 +43,7 @@ public class QueryMyApplicationService {
                         .name(application.getPosition().getName())
                         .build())
                 .status(application.getApplicantStatus())
-                .result(ResultDto.builder()
+                .result(application.getApplicationResult() == null ? null : ResultDto.builder()
                         .status(application.getApplicationResult().getApplicationResultStatus())
                         .failedReason(application.getApplicationResult().getApplicationFailedReason())
                         .announcedAt(application.getApplicationResult().getCreatedAt())

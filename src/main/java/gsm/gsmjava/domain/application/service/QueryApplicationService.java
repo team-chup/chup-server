@@ -33,6 +33,7 @@ public class QueryApplicationService {
         );
         List<Application> applications = applicationRepository.findByPostingFetchJoin(posting);
         List<ApplicationDto> applicationDtoes = applications.stream().map(application -> ApplicationDto.builder()
+                .id(application.getId())
                 .applicant(ApplicantDto.builder()
                         .name(application.getApplicantName())
                         .email(application.getApplicantEmail())

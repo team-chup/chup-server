@@ -15,9 +15,9 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 
     boolean existsByUserAndPosting(User user, Posting posting);
 
-    @Query("SELECT a FROM Application a JOIN FETCH a.position pn JOIN FETCH a.posting pg JOIN FETCH a.applicationResult ar WHERE a.user = :user ORDER BY a.createdAt DESC")
+    @Query("SELECT a FROM Application a JOIN FETCH a.position pn JOIN FETCH a.posting pg LEFT OUTER JOIN a.applicationResult ar WHERE a.user = :user ORDER BY a.createdAt DESC")
     List<Application> findByUserFetchJoin(User user);
 
-    @Query("SELECT a FROM Application a JOIN FETCH a.position pn JOIN FETCH a.posting pg JOIN FETCH a.applicationResult ar WHERE a.posting = :posting ORDER BY a.createdAt DESC")
+    @Query("SELECT a FROM Application a JOIN FETCH a.position pn JOIN FETCH a.posting pg LEFT OUTER JOIN a.applicationResult ar WHERE a.posting = :posting ORDER BY a.createdAt DESC")
     List<Application> findByPostingFetchJoin(Posting posting);
 }

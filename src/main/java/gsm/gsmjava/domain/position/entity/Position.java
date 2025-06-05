@@ -17,4 +17,8 @@ public class Position {
     private Long id;
 
     private String name;
+
+    public static Position of(String name) {
+        return Position.builder().name(name).build();
+    }
 }

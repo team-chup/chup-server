@@ -9,4 +9,6 @@ import java.util.List;
 public interface PositionRepository extends JpaRepository<Position, Long> {
     @Query("SELECT p FROM Position p WHERE p.id IN :ids")
     List<Position> queryIds(List<Long> ids);
+
+    boolean existsByName(String name);
 }

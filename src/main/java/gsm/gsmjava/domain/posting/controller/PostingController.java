@@ -7,7 +7,9 @@ import gsm.gsmjava.domain.position.service.dto.res.QueryPositionResDto;
 import gsm.gsmjava.domain.posting.service.CreatePostingService;
 import gsm.gsmjava.domain.posting.service.QueryPostingDetailService;
 import gsm.gsmjava.domain.posting.service.QueryPostingService;
+import gsm.gsmjava.domain.posting.service.UpdatePostingService;
 import gsm.gsmjava.domain.posting.service.dto.req.CreatePostingReqDto;
+import gsm.gsmjava.domain.posting.service.dto.req.UpdatePostingReqDto;
 import gsm.gsmjava.domain.posting.service.dto.res.QueryPostingDetailResDto;
 import gsm.gsmjava.domain.posting.service.dto.res.QueryPostingResDto;
 import jakarta.validation.Valid;
@@ -26,6 +28,7 @@ public class PostingController {
     private final QueryPostingDetailService queryPostingDetailService;
     private final CreatePositionService createPositionService;
     private final QueryPositionService queryPositionService;
+    private final UpdatePostingService updatePostingService;
 
     @PostMapping
     public ResponseEntity<Void> create(
@@ -47,6 +50,15 @@ public class PostingController {
     ) {
         QueryPostingDetailResDto response = queryPostingDetailService.queryOne(postingId);
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{posting_id}")
+    public ResponseEntity<Void> update(
+            @PathVariable("posting_id") Long postingId,
+            @RequestBody @Valid UpdatePostingReqDto reqDto
+    ) {
+        updatePostingService.update(postingId, reqDto);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/position")

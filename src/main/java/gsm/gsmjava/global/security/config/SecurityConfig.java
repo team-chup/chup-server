@@ -70,6 +70,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/posting").hasAnyAuthority(Authority.TEACHER.name())
                 .requestMatchers(HttpMethod.GET, "/posting").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
                 .requestMatchers(HttpMethod.GET, "/posting/{posting_id}").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
+                .requestMatchers(HttpMethod.PUT, "/posting/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
                 .requestMatchers(HttpMethod.POST, "/posting/position").hasAnyAuthority(Authority.TEACHER.name())
                 .requestMatchers(HttpMethod.GET, "/posting/position").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
 

@@ -1,5 +1,6 @@
 package gsm.gsmjava.domain.posting.entity;
 
+import gsm.gsmjava.domain.posting.service.dto.req.UpdatePostingReqDto;
 import gsm.gsmjava.domain.posting.type.CompanyLocation;
 import gsm.gsmjava.domain.posting.type.EmploymentType;
 import gsm.gsmjava.domain.postingposition.entity.PostingPosition;
@@ -52,5 +53,16 @@ public class Posting {
 
     public void add() {
         this.applicationCount++;
+    }
+
+    public void update(UpdatePostingReqDto reqDto) {
+        this.companyName = reqDto.getCompanyName();
+        this.companyDescription = reqDto.getCompanyDescription();
+        this.companyLocation = reqDto.getCompanyLocation();
+        this.employmentType = reqDto.getEmploymentType();
+        this.postingStartAt = reqDto.getStartAt();
+        this.postingEndAt = reqDto.getEndAt();
+
+        this.updatedAt = LocalDateTime.now();
     }
 }

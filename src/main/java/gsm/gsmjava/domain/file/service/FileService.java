@@ -46,7 +46,7 @@ public class FileService {
     }
 
     private void validatePostingFileContentType(String fileExtension) {
-        List<String> allowExtension = List.of("pdf", "jpg", "jpeg", "png");
+        List<String> allowExtension = List.of("pdf", "jpg", "jpeg", "png", "xls", "xlsx", "xlsm", "hwp", "hwpx", "hwt");
         if (!allowExtension.contains(fileExtension.toLowerCase())) {
             throw new ExpectedException("지원하지 않는 파일 확장자 입니다.", HttpStatus.BAD_REQUEST);
         }

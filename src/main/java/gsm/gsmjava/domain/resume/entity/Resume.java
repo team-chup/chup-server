@@ -22,12 +22,15 @@ public class Resume {
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
+    private String name;
+
     @Enumerated(EnumType.STRING)
     private ResumeType type;
 
     private String url;
 
-    public void update(ResumeType type, String url) {
+    public void update(ResumeType type, String url, String name) {
+        this.name = name;
         this.type = type;
         this.url = url;
     }

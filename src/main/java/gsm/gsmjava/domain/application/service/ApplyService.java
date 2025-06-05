@@ -61,6 +61,7 @@ public class ApplyService {
                 .applicantStudentNumber(user.getStudentNumber())
                 .applicantResumeType(user.getResume().getType())
                 .applicantResumeUrl(user.getResume().getUrl())
+                .applicantResumeName(user.getResume().getName())
                 .applicantStatus(ApplicationStatus.PENDING)
                 .build();
         Application newApplication = applicationRepository.save(application);

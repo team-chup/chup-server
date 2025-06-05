@@ -29,6 +29,7 @@ public class UserInfoService {
                         ResumeReqDto.builder()
                             .type(resume.getType())
                             .url(resume.getUrl())
+                            .name(resume.getName())
                             .build()
                 )
                 .build();

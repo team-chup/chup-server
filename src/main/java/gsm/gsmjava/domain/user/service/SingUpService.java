@@ -26,6 +26,7 @@ public class SingUpService {
         userRepository.save(currentUser);
 
         Resume resume = Resume.builder()
+                .name(reqDto.getResume().getName())
                 .type(reqDto.getResume().getType())
                 .url(reqDto.getResume().getUrl())
                 .build();

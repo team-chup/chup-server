@@ -6,10 +6,14 @@ import gsm.gsmjava.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
     @Query("SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END " +
            "FROM Application a WHERE a.posting.id = :postingId AND a.user.id = :userId")
     boolean isApplied(Long postingId, Long userId);
 
     boolean existsByUserAndPosting(User user, Posting posting);
+
+    List<Application> findByUser(User user);
 }

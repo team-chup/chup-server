@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResumeReqDto {
     @NotBlank
+    private String name;
+    @NotBlank
     private ResumeType type;
     @NotBlank
     private String url;

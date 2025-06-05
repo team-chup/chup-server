@@ -1,6 +1,7 @@
 package gsm.gsmjava.domain.application.entity;
 
 import gsm.gsmjava.domain.application.type.ApplicationStatus;
+import gsm.gsmjava.domain.applicationresult.entity.ApplicationResult;
 import gsm.gsmjava.domain.position.entity.Position;
 import gsm.gsmjava.domain.posting.entity.Posting;
 import gsm.gsmjava.domain.resume.type.ResumeType;
@@ -35,6 +36,9 @@ public class Application {
     @JoinColumn(name = "position_id", nullable = false)
     private Position position;
 
+    @OneToOne(mappedBy = "application")
+    private ApplicationResult applicationResult;
+
     private String applicantName;
 
     private String applicantEmail;
@@ -47,6 +51,8 @@ public class Application {
     private ResumeType applicantResumeType;
 
     private String applicantResumeUrl;
+
+    private String applicantResumeName;
 
     @Enumerated(EnumType.STRING)
     private ApplicationStatus applicantStatus;

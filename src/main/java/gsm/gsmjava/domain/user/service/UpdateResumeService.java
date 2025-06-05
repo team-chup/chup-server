@@ -21,7 +21,7 @@ public class UpdateResumeService {
         User currentUser = userUtil.getCurrentUser();
 
         Resume resume = currentUser.getResume();
-        resume.update(reqDto.getType(), reqDto.getUrl());
+        resume.update(reqDto.getType(), reqDto.getUrl(), reqDto.getName());
         resumeRepository.save(resume);
     }
 

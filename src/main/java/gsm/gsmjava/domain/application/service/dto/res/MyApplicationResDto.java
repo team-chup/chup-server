@@ -1,0 +1,62 @@
+package gsm.gsmjava.domain.application.service.dto.res;
+
+import gsm.gsmjava.domain.application.type.ApplicationStatus;
+import gsm.gsmjava.domain.applicationresult.type.ApplicationResultStatus;
+import gsm.gsmjava.domain.posting.type.CompanyLocation;
+import gsm.gsmjava.domain.posting.type.EmploymentType;
+import gsm.gsmjava.domain.resume.type.ResumeType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Getter
+@Builder
+@AllArgsConstructor
+public class MyApplicationResDto {
+    private Integer count;
+    private List<ApplicationDto> applications;
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class ApplicationDto {
+        private Long postingId;
+        private String companyName;
+        private CompanyLocation companyLocation;
+        private EmploymentType employmentType;
+        private PositionDto position;
+        private ApplicationStatus status;
+        private ResumeDto resume;
+        private ResultDto result;
+        private LocalDateTime createdAt;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class ResumeDto {
+        private String name;
+        private String url;
+        private ResumeType type;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class PositionDto {
+        private Long id;
+        private String name;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class ResultDto {
+        private ApplicationResultStatus status;
+        private String failedReason;
+        private LocalDateTime announcedAt;
+    }
+}

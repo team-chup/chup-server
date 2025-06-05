@@ -23,10 +23,10 @@ public class SingUpService {
         User currentUser = userUtil.getCurrentUser();
 
         currentUser.signup(reqDto);
-        userRepository.save(currentUser);
+        User updatedUser = userRepository.save(currentUser);
 
         Resume resume = Resume.builder()
-                .user(currentUser)
+                .user(updatedUser)
                 .name(reqDto.getResume().getName())
                 .type(reqDto.getResume().getType())
                 .url(reqDto.getResume().getUrl())

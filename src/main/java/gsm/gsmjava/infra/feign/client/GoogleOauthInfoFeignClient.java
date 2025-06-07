@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @FeignClient(name = "GoogleOauthInfoClient", url = "${oauth.google.info-url}")
 public interface GoogleOauthInfoFeignClient {
-    @GetMapping
+    @GetMapping("/oauth2/v1/userinfo")
     GoogleInfoResDto getInfo(
         @RequestHeader("Authorization") String accessToken
     );

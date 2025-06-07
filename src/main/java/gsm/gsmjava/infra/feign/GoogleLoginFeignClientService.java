@@ -17,6 +17,7 @@ public class GoogleLoginFeignClientService {
         try {
             return getInfo(accessToken);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("google oauth 사용자 정보 요청 중 예외가 발생했습니다.");
         }
     }

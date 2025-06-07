@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "GoogleOauthInfoClient", url = "${oauth.google.info-url}")
+@FeignClient(name = "GoogleOauthInfoClient", url = "https://www.googleapis.com")
 public interface GoogleOauthInfoFeignClient {
     @GetMapping("/oauth2/v1/userinfo")
     GoogleInfoResDto getInfo(

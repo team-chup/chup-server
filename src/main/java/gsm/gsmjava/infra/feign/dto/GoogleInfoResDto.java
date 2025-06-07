@@ -1,17 +1,17 @@
 package gsm.gsmjava.infra.feign.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@JsonIgnoreProperties(ignoreUnknown = true)
+@NoArgsConstructor
 public class GoogleInfoResDto {
+    private String id;
     private String email;
-
-    public GoogleInfoResDto(String email) {
-        this.email = email;
-    }
-
-    public GoogleInfoResDto() {
-    }
+    private boolean verified_email;
+    private String name;
+    private String given_name;
+    private String family_name;
+    private String picture;
+    private String hd;
 }

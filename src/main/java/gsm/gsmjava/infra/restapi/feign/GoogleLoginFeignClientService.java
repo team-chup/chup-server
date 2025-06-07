@@ -1,15 +1,16 @@
-package gsm.gsmjava.infra.feign;
+package gsm.gsmjava.infra.restapi.feign;
 
-import gsm.gsmjava.infra.feign.client.GoogleOauthInfoFeignClient;
-import gsm.gsmjava.infra.feign.dto.GoogleInfoResDto;
+import gsm.gsmjava.infra.restapi.GoogleLoginService;
+import gsm.gsmjava.infra.restapi.feign.client.GoogleOauthInfoFeignClient;
+import gsm.gsmjava.infra.restapi.feign.dto.GoogleInfoResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import static gsm.gsmjava.global.filter.JwtReqFilter.BEARER_PREFIX;
 
-@Service
+//@Service
 @RequiredArgsConstructor
-public class GoogleLoginFeignClientService {
+public class GoogleLoginFeignClientService implements GoogleLoginService {
 
     private final GoogleOauthInfoFeignClient googleOauthInfoFeignClient;
 

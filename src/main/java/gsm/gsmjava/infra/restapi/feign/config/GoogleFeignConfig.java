@@ -1,4 +1,4 @@
-package gsm.gsmjava.infra.feign.config;
+package gsm.gsmjava.infra.restapi.feign.config;
 
 import feign.Request;
 import feign.Retryer;

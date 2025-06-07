@@ -1,4 +1,4 @@
-package gsm.gsmjava.infra.feign.dto;
+package gsm.gsmjava.infra.restapi.feign.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

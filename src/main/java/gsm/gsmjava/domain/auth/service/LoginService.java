@@ -6,8 +6,10 @@ import gsm.gsmjava.domain.user.entity.User;
 import gsm.gsmjava.domain.user.repository.UserRepository;
 import gsm.gsmjava.global.security.jwt.TokenGenerator;
 import gsm.gsmjava.global.security.jwt.dto.TokenDto;
-import gsm.gsmjava.infra.feign.GoogleLoginFeignClientService;
-import gsm.gsmjava.infra.feign.dto.GoogleInfoResDto;
+import gsm.gsmjava.infra.restapi.GoogleLoginService;
+import gsm.gsmjava.infra.restapi.feign.GoogleLoginFeignClientService;
+import gsm.gsmjava.infra.restapi.feign.dto.GoogleInfoResDto;
+import gsm.gsmjava.infra.restapi.resttemplate.GoogleLoginRestClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class LoginService {
 
-    private final GoogleLoginFeignClientService googleLoginService;
+    private final GoogleLoginService googleLoginService;
     private final UserRepository userRepository;
     private final TokenGenerator tokenGenerator;
 

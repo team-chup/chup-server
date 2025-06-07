@@ -1,7 +1,7 @@
-package gsm.gsmjava.infra.feign.client;
+package gsm.gsmjava.infra.restapi.feign.client;
 
-import gsm.gsmjava.infra.feign.config.GoogleFeignConfig;
-import gsm.gsmjava.infra.feign.dto.GoogleInfoResDto;
+import gsm.gsmjava.infra.restapi.feign.config.GoogleFeignConfig;
+import gsm.gsmjava.infra.restapi.feign.dto.GoogleInfoResDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;

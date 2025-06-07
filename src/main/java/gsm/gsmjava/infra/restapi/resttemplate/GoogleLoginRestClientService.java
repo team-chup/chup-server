@@ -3,6 +3,7 @@ package gsm.gsmjava.infra.restapi.resttemplate;
 import gsm.gsmjava.infra.restapi.GoogleLoginService;
 import gsm.gsmjava.infra.restapi.feign.dto.GoogleInfoResDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,7 @@ import static gsm.gsmjava.global.filter.JwtReqFilter.AUTHORIZATION_HEADER;
 import static gsm.gsmjava.global.filter.JwtReqFilter.BEARER_PREFIX;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class GoogleLoginRestClientService implements GoogleLoginService {
 
@@ -30,6 +32,7 @@ public class GoogleLoginRestClientService implements GoogleLoginService {
     }
 
     private GoogleInfoResDto getInfo(String accessToken) {
+        log.info("Google OAuth accessToken: {}", accessToken);
         HttpHeaders headers = new HttpHeaders();
         headers.set(AUTHORIZATION_HEADER, BEARER_PREFIX + accessToken);
         HttpEntity<Void> entity = new HttpEntity<>(headers);

@@ -1,10 +1,9 @@
 package gsm.gsmjava.infra.restapi.feign.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@Getter
-@NoArgsConstructor
+
+@Data
 public class GoogleInfoResDto {
     private String id;
     private String email;

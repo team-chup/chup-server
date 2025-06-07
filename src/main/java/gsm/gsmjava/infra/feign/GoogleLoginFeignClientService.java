@@ -15,6 +15,7 @@ public class GoogleLoginFeignClientService {
 
     public GoogleInfoResDto login(String accessToken) {
         try {
+            System.out.println("=========== " + accessToken);
             return getInfo(accessToken);
         } catch (Exception e) {
             throw new RuntimeException("google oauth 사용자 정보 요청 중 예외가 발생했습니다.");

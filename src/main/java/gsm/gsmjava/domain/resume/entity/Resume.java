@@ -22,11 +22,14 @@ public class Resume {
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ResumeType type;
 
+    @Column(nullable = false)
     private String url;
 
     public void update(ResumeType type, String url, String name) {

@@ -1,5 +1,7 @@
 package gsm.gsmjava.domain.auth.service;
 
+import gsm.gsmjava.domain.auth.entity.RefreshToken;
+import gsm.gsmjava.domain.auth.repository.RefreshTokenRepository;
 import gsm.gsmjava.domain.auth.service.dto.req.LoginReqDto;
 import gsm.gsmjava.domain.auth.service.dto.res.AuthResDto;
 import gsm.gsmjava.domain.user.entity.User;
@@ -21,6 +23,7 @@ public class LoginService {
     private final GoogleLoginService googleLoginService;
     private final UserRepository userRepository;
     private final TokenGenerator tokenGenerator;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
     public AuthResDto login(LoginReqDto reqDto) {
@@ -28,6 +31,13 @@ public class LoginService {
 
         User user = getUserOrNew(infoDto);
         TokenDto tokenDto = tokenGenerator.generateToken(String.valueOf(user.getId()));
+
+        RefreshToken refreshToken = RefreshToken.builder()
+                .userId(user.getId())
+                .token(tokenDto.getRefreshToken())
+                .expirationTime(tokenDto.getRefreshTokenExp())
+                .build();
+        refreshTokenRepository.save(refreshToken);
 
         return AuthResDto.builder()
                 .accessToken(tokenDto.getAccessToken())

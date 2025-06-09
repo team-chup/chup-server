@@ -59,33 +59,33 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(httpRequests -> httpRequests
 
-                .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/auth/refresh").permitAll()
+//                .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+//                .requestMatchers(HttpMethod.POST, "/auth/refresh").permitAll()
+//
+//                .requestMatchers(HttpMethod.POST, "/user/signup").hasAnyAuthority(Authority.TEMP.name())
+//                .requestMatchers(HttpMethod.GET, "/user/me").hasAnyAuthority(Authority.USER.name())
+//                .requestMatchers(HttpMethod.PUT, "/user/me").hasAnyAuthority(Authority.USER.name())
+//                .requestMatchers(HttpMethod.PATCH, "/user/me/resume").hasAnyAuthority(Authority.USER.name())
+//
+//                .requestMatchers(HttpMethod.POST, "/posting").hasAnyAuthority(Authority.TEACHER.name())
+//                .requestMatchers(HttpMethod.GET, "/posting").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
+//                .requestMatchers(HttpMethod.GET, "/posting/{posting_id}").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
+//                .requestMatchers(HttpMethod.PUT, "/posting/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
+//                .requestMatchers(HttpMethod.POST, "/posting/position").hasAnyAuthority(Authority.TEACHER.name())
+//                .requestMatchers(HttpMethod.GET, "/posting/position").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
+//
+//                .requestMatchers(HttpMethod.POST, "/application/apply/{posting_id}").hasAnyAuthority(Authority.USER.name())
+//                .requestMatchers(HttpMethod.GET, "/application/me").hasAnyAuthority(Authority.USER.name())
+//                .requestMatchers(HttpMethod.GET, "/application/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
+//                .requestMatchers(HttpMethod.POST, "/application/announce/{application_id}").hasAnyAuthority(Authority.TEACHER.name())
+//                .requestMatchers(HttpMethod.GET, "/application/download/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
+//
+//                .requestMatchers(HttpMethod.POST, "/file/resume").hasAnyAuthority(Authority.TEMP.name(), Authority.USER.name())
+//                .requestMatchers(HttpMethod.POST, "/file/posting").hasAnyAuthority(Authority.TEACHER.name())
+//
+//                .requestMatchers(HttpMethod.GET, "/health").permitAll()
 
-                .requestMatchers(HttpMethod.POST, "/user/signup").hasAnyAuthority(Authority.TEMP.name())
-                .requestMatchers(HttpMethod.GET, "/user/me").hasAnyAuthority(Authority.USER.name())
-                .requestMatchers(HttpMethod.PUT, "/user/me").hasAnyAuthority(Authority.USER.name())
-                .requestMatchers(HttpMethod.PATCH, "/user/me/resume").hasAnyAuthority(Authority.USER.name())
-
-                .requestMatchers(HttpMethod.POST, "/posting").hasAnyAuthority(Authority.TEACHER.name())
-                .requestMatchers(HttpMethod.GET, "/posting").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
-                .requestMatchers(HttpMethod.GET, "/posting/{posting_id}").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
-                .requestMatchers(HttpMethod.PUT, "/posting/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
-                .requestMatchers(HttpMethod.POST, "/posting/position").hasAnyAuthority(Authority.TEACHER.name())
-                .requestMatchers(HttpMethod.GET, "/posting/position").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
-
-                .requestMatchers(HttpMethod.POST, "/application/apply/{posting_id}").hasAnyAuthority(Authority.USER.name())
-                .requestMatchers(HttpMethod.GET, "/application/me").hasAnyAuthority(Authority.USER.name())
-                .requestMatchers(HttpMethod.GET, "/application/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
-                .requestMatchers(HttpMethod.POST, "/application/announce/{application_id}").hasAnyAuthority(Authority.TEACHER.name())
-                .requestMatchers(HttpMethod.GET, "/application/download/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
-
-                .requestMatchers(HttpMethod.POST, "/file/resume").hasAnyAuthority(Authority.TEMP.name(), Authority.USER.name())
-                .requestMatchers(HttpMethod.POST, "/file/posting").hasAnyAuthority(Authority.TEACHER.name())
-
-                .requestMatchers(HttpMethod.GET, "/health").permitAll()
-
-                .anyRequest().denyAll()
+                .anyRequest().permitAll()
         );
 
         return http.build();

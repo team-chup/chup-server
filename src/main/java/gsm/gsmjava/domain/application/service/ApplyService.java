@@ -34,7 +34,7 @@ public class ApplyService {
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
-    @CacheEvict(value = POSTING_LIST_CACHE, cacheManager = "cacheManager")
+    @CacheEvict(value = POSTING_LIST_CACHE, key = "'ALL'", cacheManager = "cacheManager")
     public void apply(Long postingId, ApplyReqDto reqDto) {
         LocalDateTime now = LocalDateTime.now();
         Posting posting = postingRepository.queryNotEndById(now, postingId).orElseThrow(

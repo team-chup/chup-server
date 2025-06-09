@@ -19,7 +19,7 @@ public class UpdatePostingService {
     private final PostingRepository postingRepository;
 
     @Transactional
-    @CacheEvict(value = POSTING_LIST_CACHE, cacheManager = "cacheManager")
+    @CacheEvict(value = POSTING_LIST_CACHE, key = "'ALL'", cacheManager = "cacheManager")
     public void update(Long postingId, UpdatePostingReqDto reqDto) {
         Posting posting = postingRepository.findById(postingId).orElseThrow(
                 () -> new ExpectedException("해당 공고는 존재하지 않습니다. id = " + postingId, HttpStatus.BAD_REQUEST)

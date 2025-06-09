@@ -37,7 +37,7 @@ public class CreatePostingService {
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @Transactional
-    @CacheEvict(value = POSTING_LIST_CACHE, cacheManager = "cacheManager")
+    @CacheEvict(value = POSTING_LIST_CACHE, key = "'ALL'", cacheManager = "cacheManager")
     public void create(CreatePostingReqDto reqDto) {
         if (reqDto.getFiles().size() > 5) {
             throw new ExpectedException("최대 5개의 파일만 업로드할 수 있습니다.", HttpStatus.BAD_REQUEST);

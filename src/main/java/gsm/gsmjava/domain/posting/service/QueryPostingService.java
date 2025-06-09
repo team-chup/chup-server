@@ -20,7 +20,7 @@ public class QueryPostingService {
     private final PostingRepository postingRepository;
 
     @Transactional(readOnly = true)
-    @Cacheable(value = POSTING_LIST_CACHE, cacheManager = "cacheManager")
+    @Cacheable(value = POSTING_LIST_CACHE, key = "'ALL'", cacheManager = "cacheManager")
     public QueryPostingResDto queryAll() {
         LocalDateTime now = LocalDateTime.now();
         List<Posting> postings = postingRepository.queryNotEndFetchJoin(now);

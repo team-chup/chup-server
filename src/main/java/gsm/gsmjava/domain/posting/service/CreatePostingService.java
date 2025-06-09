@@ -59,7 +59,7 @@ public class CreatePostingService {
                 .build();
         Posting newPosting = postingRepository.save(posting);
 
-        List<Position> positions = positionRepository.queryIds(reqDto.getPositions());
+        List<Position> positions = positionRepository.queryIds(reqDto.getPositions().stream().distinct().toList());
         List<PostingPosition> postingPositions = positions.stream()
             .map(position ->
                 PostingPosition.builder()

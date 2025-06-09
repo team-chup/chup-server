@@ -45,7 +45,7 @@ public class ApplyService {
         );
         User user = userUtil.getCurrentUser();
 
-        boolean applied = applicationRepository.existsByUserAndPosting(user, posting);
+        boolean applied = applicationRepository.findForUpdateByUserAndPosting(user, posting).isPresent();
         if (applied) {
             throw new ExpectedException("이미 해당 공고에 지원하였습니다.", HttpStatus.BAD_REQUEST);
         }

@@ -63,7 +63,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/auth/refresh").permitAll()
 
                 .requestMatchers(HttpMethod.POST, "/user/signup").hasAnyAuthority(Authority.TEMP.name())
-                .requestMatchers(HttpMethod.GET, "/user/me").hasAnyAuthority(Authority.USER.name())
+                .requestMatchers(HttpMethod.GET, "/user/me").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
                 .requestMatchers(HttpMethod.PUT, "/user/me").hasAnyAuthority(Authority.USER.name())
                 .requestMatchers(HttpMethod.PATCH, "/user/me/resume").hasAnyAuthority(Authority.USER.name())
 

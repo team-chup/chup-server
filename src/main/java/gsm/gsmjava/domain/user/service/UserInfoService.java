@@ -26,6 +26,7 @@ public class UserInfoService {
                 .studentNumber(currentUser.getStudentNumber())
                 .authority(currentUser.getAuthority())
                 .resume(
+                        resume == null ? null :
                         ResumeReqDto.builder()
                             .type(resume.getType())
                             .url(resume.getUrl())

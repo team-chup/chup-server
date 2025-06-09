@@ -1,5 +1,6 @@
 package gsm.gsmjava.domain.application.service.dto.res;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import gsm.gsmjava.domain.application.type.ApplicationStatus;
 import gsm.gsmjava.domain.applicationresult.type.ApplicationResultStatus;
 import gsm.gsmjava.domain.posting.type.CompanyLocation;
@@ -32,8 +33,11 @@ public class MyApplicationResDto {
         private ApplicationStatus status;
         private ResumeDto resume;
         private ResultDto result;
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime createdAt;
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime startAt;
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime endAt;
     }
 
@@ -60,6 +64,7 @@ public class MyApplicationResDto {
     public static class ResultDto {
         private ApplicationResultStatus status;
         private String failedReason;
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime announcedAt;
     }
 }

@@ -1,5 +1,6 @@
 package gsm.gsmjava.domain.application.service.dto.res;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.PositionDto;
 import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.ResultDto;
 import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.ResumeDto;
@@ -38,6 +39,7 @@ public class ApplicationResDto {
         private ApplicationStatus status;
         private ResumeDto resume;
         private ResultDto result;
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime createdAt;
     }
 }

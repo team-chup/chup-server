@@ -1,8 +1,10 @@
 package gsm.gsmjava.domain.posting.entity;
 
+import gsm.gsmjava.domain.posting.service.dto.req.CreatePostingReqDto;
 import gsm.gsmjava.domain.posting.service.dto.req.UpdatePostingReqDto;
 import gsm.gsmjava.domain.posting.type.CompanyLocation;
 import gsm.gsmjava.domain.posting.type.EmploymentType;
+import gsm.gsmjava.domain.postingfile.entity.PostingFile;
 import gsm.gsmjava.domain.postingposition.entity.PostingPosition;
 import gsm.gsmjava.domain.user.entity.User;
 import jakarta.persistence.*;
@@ -30,6 +32,9 @@ public class Posting {
 
     @OneToMany(mappedBy = "posting")
     private List<PostingPosition> postingPositions;
+
+    @OneToMany(mappedBy = "posting")
+    private List<PostingFile> postingFiles;
 
     private String companyName;
 

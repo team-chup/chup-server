@@ -3,6 +3,7 @@ package gsm.gsmjava.domain.posting.service;
 import gsm.gsmjava.domain.application.repository.ApplicationRepository;
 import gsm.gsmjava.domain.posting.entity.Posting;
 import gsm.gsmjava.domain.posting.repository.PostingRepository;
+import gsm.gsmjava.domain.posting.service.dto.req.CreatePostingReqDto;
 import gsm.gsmjava.domain.posting.service.dto.res.QueryPostingDetailResDto;
 import gsm.gsmjava.domain.posting.service.dto.res.QueryPostingResDto.PositionDto;
 import gsm.gsmjava.domain.user.entity.User;
@@ -42,6 +43,12 @@ public class QueryPostingDetailService {
                             .name(position.getPosition().getName())
                             .build())
                     .toList())
+                .files(posting.getPostingFiles().stream()
+                    .map(file -> CreatePostingReqDto.PostingFile.builder()
+                        .name(file.getName())
+                        .url(file.getUrl())
+                        .build()
+                    ).toList())
                 .applicationCount(posting.getApplicationCount())
                 .createdAt(posting.getCreatedAt())
                 .startAt(posting.getPostingStartAt())

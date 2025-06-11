@@ -39,7 +39,7 @@ public class CreatePostingEventHandler {
                 "📍 근무 지역: **%s**\n\n" +
                 "🧑‍💻 모집 포지션: **%s**\n\n" +
                 "🗓️ 모집 기간: **%s ~ %s**\n\n" +
-                "🔗 [채용 공고 바로가기](https://chup.today/posting/%s)",
+                "🔗 [채용 공고 바로가기](https://chup.today/company/%s)",
                 event.getCompanyName(),
                 event.getCompanyDescription().substring(0, Math.min(100, event.getCompanyDescription().length())),
                 event.getEmploymentType().getName(),

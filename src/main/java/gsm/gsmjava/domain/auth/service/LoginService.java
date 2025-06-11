@@ -6,6 +6,7 @@ import gsm.gsmjava.domain.auth.service.dto.req.LoginReqDto;
 import gsm.gsmjava.domain.auth.service.dto.res.AuthResDto;
 import gsm.gsmjava.domain.user.entity.User;
 import gsm.gsmjava.domain.user.repository.UserRepository;
+import gsm.gsmjava.global.error.ExpectedException;
 import gsm.gsmjava.global.security.jwt.TokenGenerator;
 import gsm.gsmjava.global.security.jwt.dto.TokenDto;
 import gsm.gsmjava.infra.restapi.GoogleLoginService;
@@ -13,6 +14,7 @@ import gsm.gsmjava.infra.restapi.feign.GoogleLoginFeignClientService;
 import gsm.gsmjava.infra.restapi.feign.dto.GoogleInfoResDto;
 import gsm.gsmjava.infra.restapi.resttemplate.GoogleLoginRestClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,8 @@ public class LoginService {
     @Transactional
     public AuthResDto login(LoginReqDto reqDto) {
         GoogleInfoResDto infoDto = googleLoginService.login(reqDto.getOauthToken());
+
+        validGSMLogin(infoDto.getEmail());
 
         User user = getUserOrNew(infoDto);
         TokenDto tokenDto = tokenGenerator.generateToken(String.valueOf(user.getId()));
@@ -52,6 +56,12 @@ public class LoginService {
                 .orElseGet(
                         () -> userRepository.save(User.of(infoDto.getEmail()))
                 );
+    }
+
+    private void validGSMLogin(String email) {
+        if (!email.endsWith("@gsm.hs.kr")) {
+            throw new ExpectedException("요청한 이메일이 GSM 학생용 이메일이 아닙니다.", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

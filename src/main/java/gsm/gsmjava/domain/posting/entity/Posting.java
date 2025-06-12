@@ -42,6 +42,8 @@ public class Posting {
 
     private String companyName;
 
+    @Lob
+    @Column(name = "company_description", columnDefinition = "TEXT")
     private String companyDescription;
 
     @Enumerated(EnumType.STRING)

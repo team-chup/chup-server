@@ -1,5 +1,6 @@
 package gsm.gsmjava.domain.posting.entity;
 
+import gsm.gsmjava.domain.application.entity.Application;
 import gsm.gsmjava.domain.posting.service.dto.req.CreatePostingReqDto;
 import gsm.gsmjava.domain.posting.service.dto.req.UpdatePostingReqDto;
 import gsm.gsmjava.domain.posting.type.CompanyLocation;
@@ -30,11 +31,14 @@ public class Posting {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @OneToMany(mappedBy = "posting")
+    @OneToMany(mappedBy = "posting", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostingPosition> postingPositions;
 
-    @OneToMany(mappedBy = "posting")
+    @OneToMany(mappedBy = "posting", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostingFile> postingFiles;
+
+    @OneToMany(mappedBy = "posting", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Application> applications;
 
     private String companyName;
 

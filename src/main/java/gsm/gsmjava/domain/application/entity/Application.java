@@ -36,7 +36,7 @@ public class Application {
     @JoinColumn(name = "position_id", nullable = false)
     private Position position;
 
-    @OneToOne(mappedBy = "application")
+    @OneToOne(mappedBy = "application", cascade = CascadeType.ALL, orphanRemoval = true)
     private ApplicationResult applicationResult;
 
     private String applicantName;

@@ -4,10 +4,7 @@ import gsm.gsmjava.domain.position.service.CreatePositionService;
 import gsm.gsmjava.domain.position.service.QueryPositionService;
 import gsm.gsmjava.domain.position.service.dto.req.CreatePositionReqDto;
 import gsm.gsmjava.domain.position.service.dto.res.QueryPositionResDto;
-import gsm.gsmjava.domain.posting.service.CreatePostingService;
-import gsm.gsmjava.domain.posting.service.QueryPostingDetailService;
-import gsm.gsmjava.domain.posting.service.QueryPostingService;
-import gsm.gsmjava.domain.posting.service.UpdatePostingService;
+import gsm.gsmjava.domain.posting.service.*;
 import gsm.gsmjava.domain.posting.service.dto.req.CreatePostingReqDto;
 import gsm.gsmjava.domain.posting.service.dto.req.UpdatePostingReqDto;
 import gsm.gsmjava.domain.posting.service.dto.res.QueryPostingDetailResDto;
@@ -29,6 +26,7 @@ public class PostingController {
     private final CreatePositionService createPositionService;
     private final QueryPositionService queryPositionService;
     private final UpdatePostingService updatePostingService;
+    private final DeletePostingService deletePostingService;
 
     @PostMapping
     public ResponseEntity<Void> create(
@@ -73,6 +71,14 @@ public class PostingController {
     public ResponseEntity<QueryPositionResDto> queryPosition() {
         QueryPositionResDto response = queryPositionService.queryAll();
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{posting_id}")
+    public ResponseEntity<Void> delete(
+            @PathVariable("posting_id") Long postingId
+    ) {
+        deletePostingService.delete(postingId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

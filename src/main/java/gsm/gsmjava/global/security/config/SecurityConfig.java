@@ -73,6 +73,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/posting/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
                 .requestMatchers(HttpMethod.POST, "/posting/position").hasAnyAuthority(Authority.TEACHER.name())
                 .requestMatchers(HttpMethod.GET, "/posting/position").hasAnyAuthority(Authority.USER.name(), Authority.TEACHER.name())
+                .requestMatchers(HttpMethod.DELETE, "/posting/{posting_id}").hasAnyAuthority(Authority.TEACHER.name())
 
                 .requestMatchers(HttpMethod.POST, "/application/apply/{posting_id}").hasAnyAuthority(Authority.USER.name())
                 .requestMatchers(HttpMethod.GET, "/application/me").hasAnyAuthority(Authority.USER.name())

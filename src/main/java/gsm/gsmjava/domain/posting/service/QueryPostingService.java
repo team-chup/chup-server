@@ -7,14 +7,11 @@ import gsm.gsmjava.domain.user.entity.User;
 import gsm.gsmjava.domain.user.type.Authority;
 import gsm.gsmjava.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static gsm.gsmjava.global.cache.CacheConstant.POSTING_LIST_CACHE;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +21,6 @@ public class QueryPostingService {
     private final UserUtil userUtil;
 
     @Transactional(readOnly = true)
-    @Cacheable(value = POSTING_LIST_CACHE, key = "'ALL'", cacheManager = "cacheManager")
     public QueryPostingResDto queryAll() {
         User currentUser = userUtil.getCurrentUser();
         Authority authority = currentUser.getAuthority();

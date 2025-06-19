@@ -3,6 +3,9 @@ package gsm.gsmjava.domain.posting.service;
 import gsm.gsmjava.domain.posting.entity.Posting;
 import gsm.gsmjava.domain.posting.repository.PostingRepository;
 import gsm.gsmjava.domain.posting.service.dto.res.QueryPostingResDto;
+import gsm.gsmjava.domain.user.entity.User;
+import gsm.gsmjava.domain.user.type.Authority;
+import gsm.gsmjava.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,12 +21,19 @@ import static gsm.gsmjava.global.cache.CacheConstant.POSTING_LIST_CACHE;
 public class QueryPostingService {
 
     private final PostingRepository postingRepository;
+    private final UserUtil userUtil;
 
     @Transactional(readOnly = true)
     @Cacheable(value = POSTING_LIST_CACHE, key = "'ALL'", cacheManager = "cacheManager")
     public QueryPostingResDto queryAll() {
+        User currentUser = userUtil.getCurrentUser();
+        Authority authority = currentUser.getAuthority();
+
         LocalDateTime now = LocalDateTime.now();
-        List<Posting> postings = postingRepository.queryNotEndFetchJoin(now);
+        List<Posting> postings =
+                authority == Authority.USER
+                        ? postingRepository.queryNotEndFetchJoin(now)
+                        : postingRepository.queryAllFetchJoin();
 
         return QueryPostingResDto.builder()
                 .count(postings.size())

@@ -17,6 +17,12 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
     List<Posting> queryNotEndFetchJoin(LocalDateTime now);
 
     @Query("SELECT pg FROM Posting pg " +
+            "JOIN FETCH pg.postingPositions pp " +
+            "JOIN FETCH pp.position pn " +
+            "ORDER BY pg.createdAt DESC")
+    List<Posting> queryAllFetchJoin();
+
+    @Query("SELECT pg FROM Posting pg " +
             "WHERE pg.id = :postingId AND pg.postingEndAt > :now " +
             "ORDER BY pg.createdAt DESC")
     Optional<Posting> queryNotEndById(LocalDateTime now, Long postingId);

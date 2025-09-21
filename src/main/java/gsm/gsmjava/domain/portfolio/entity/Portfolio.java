@@ -1,18 +1,17 @@
-package gsm.gsmjava.domain.resume.entity;
+package gsm.gsmjava.domain.portfolio.entity;
 
-import gsm.gsmjava.domain.resume.type.ResumeType;
 import gsm.gsmjava.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "tbl_resume")
+@Table(name = "tbl_portfolio")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString
 @Builder
 @AllArgsConstructor
-public class Resume {
+public class Portfolio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

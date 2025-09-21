@@ -1,4 +1,4 @@
-package gsm.gsmjava.domain.resume.service.dto.req;
+package gsm.gsmjava.domain.portfolio.service.dto.req;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResumeReqDto {
+public class PortfolioReqDto {
     @NotBlank
     private String name;
     @NotBlank

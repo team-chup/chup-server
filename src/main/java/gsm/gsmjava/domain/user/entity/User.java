@@ -1,5 +1,6 @@
 package gsm.gsmjava.domain.user.entity;
 
+import gsm.gsmjava.domain.portfolio.entity.Portfolio;
 import gsm.gsmjava.domain.resume.entity.Resume;
 import gsm.gsmjava.domain.user.service.dto.req.SignUpReqDto;
 import gsm.gsmjava.domain.user.service.dto.req.UpdateInfoReqDto;
@@ -35,6 +36,9 @@ public class User {
 
     @OneToOne(mappedBy = "user")
     private Resume resume;
+
+    @OneToOne(mappedBy = "user")
+    private Portfolio portfolio;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "authority")

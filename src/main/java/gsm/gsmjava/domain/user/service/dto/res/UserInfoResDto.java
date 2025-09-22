@@ -1,5 +1,6 @@
 package gsm.gsmjava.domain.user.service.dto.res;
 
+import gsm.gsmjava.domain.portfolio.service.dto.req.PortfolioReqDto;
 import gsm.gsmjava.domain.resume.service.dto.req.ResumeReqDto;
 import gsm.gsmjava.domain.user.type.Authority;
 import lombok.AllArgsConstructor;
@@ -16,4 +17,5 @@ public class UserInfoResDto {
     private String phoneNumber;
     private Authority authority;
     private ResumeReqDto resume;
+    private PortfolioReqDto portfolio;
 }

@@ -1,6 +1,5 @@
 package gsm.gsmjava.domain.resume.entity;
 
-import gsm.gsmjava.domain.resume.type.ResumeType;
 import gsm.gsmjava.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;

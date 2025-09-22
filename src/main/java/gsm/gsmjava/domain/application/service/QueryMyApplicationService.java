@@ -3,10 +3,7 @@ package gsm.gsmjava.domain.application.service;
 import gsm.gsmjava.domain.application.entity.Application;
 import gsm.gsmjava.domain.application.repository.ApplicationRepository;
 import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto;
-import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.MyApplicationDto;
-import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.PositionDto;
-import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.ResultDto;
-import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.ResumeDto;
+import gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.*;
 import gsm.gsmjava.domain.user.entity.User;
 import gsm.gsmjava.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
@@ -35,8 +32,11 @@ public class QueryMyApplicationService {
                 .employmentType(application.getPosting().getEmploymentType())
                 .resume(ResumeDto.builder()
                         .name(application.getApplicantResumeName())
-                        .type(application.getApplicantResumeType())
                         .url(application.getApplicantResumeUrl())
+                        .build())
+                .portfolio(PortfolioDto.builder()
+                        .name(application.getApplicantPortfolioName())
+                        .url(application.getApplicantPortfolioUrl())
                         .build())
                 .position(PositionDto.builder()
                         .id(application.getPosition().getId())

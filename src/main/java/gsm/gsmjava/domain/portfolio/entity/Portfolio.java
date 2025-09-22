@@ -27,8 +27,9 @@ public class Portfolio {
     @Column(nullable = false)
     private String url;
 
-    public void update(String url, String name) {
+    public void update(String url, String name, User user) {
         this.name = name;
         this.url = url;
+        this.user = user;
     }
 }

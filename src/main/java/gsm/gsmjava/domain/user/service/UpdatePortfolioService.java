@@ -24,7 +24,7 @@ public class UpdatePortfolioService {
                 ? Portfolio.builder().build()
                 : currentUser.getPortfolio();
 
-        portfolio.update(reqDto.getUrl(), reqDto.getName());
+        portfolio.update(reqDto.getUrl(), reqDto.getName(), currentUser);
         portfolioRepository.save(portfolio);
     }
 

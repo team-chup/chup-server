@@ -9,12 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
-import java.net.URL;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
-import static gsm.gsmjava.domain.resume.type.ResumeType.*;
 
 @Service
 @RequiredArgsConstructor
@@ -37,15 +34,13 @@ public class DownloadService {
                     String studentNumber = app.getUser().getStudentNumber();
                     String position = app.getPosition().getName();
                     String company = app.getPosting().getCompanyName();
-                    String extension = app.getApplicantResumeType() == LINK ? "txt" : "pdf";
+                    String extension = "txt";
                     String resumeName = sanitize(name) + "_" + sanitize(studentNumber) + "_" + sanitize(position) + "_이력서." + extension;
 
-                    byte[] resumeBytes;
-                    if (app.getApplicantResumeType() == LINK) {
-                        resumeBytes = createTxtWithLink(app.getApplicantResumeUrl());
-                    } else {
-                        resumeBytes = downloadPdfFile(app.getApplicantResumeUrl());
-                    }
+                    byte[] resumeBytes = createTxtWithLink(
+                            app.getApplicantResumeName(), app.getApplicantResumeUrl(),
+                            app.getApplicantPortfolioName(), app.getApplicantPortfolioUrl()
+                    );
 
                     String pathInZip = sanitize(company) + "_이력서_모음/" + resumeName;
                     zip.putNextEntry(new ZipEntry(pathInZip));
@@ -60,14 +55,9 @@ public class DownloadService {
         }
     }
 
-    private byte[] downloadPdfFile(String url) throws IOException {
-        try (InputStream in = new URL(url).openStream()) {
-            return in.readAllBytes();
-        }
-    }
-
-    private byte[] createTxtWithLink(String link) {
-        String content = "링크로 제출된 이력서입니다:\n" + link;
+    private byte[] createTxtWithLink(String resumeName, String resumeUrl, String portfolioName, String portfolioUrl) {
+        String content = resumeName != null ? resumeName + ": " + resumeUrl : "";
+        content += portfolioName != null ? portfolioName + ": " + portfolioUrl : "";
         return content.getBytes(java.nio.charset.StandardCharsets.UTF_8);
     }
 

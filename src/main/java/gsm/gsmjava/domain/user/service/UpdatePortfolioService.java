@@ -20,7 +20,10 @@ public class UpdatePortfolioService {
     public void update(PortfolioReqDto reqDto) {
         User currentUser = userUtil.getCurrentUser();
 
-        Portfolio portfolio = currentUser.getPortfolio();
+        Portfolio portfolio = currentUser.getPortfolio() == null
+                ? Portfolio.builder().build()
+                : currentUser.getPortfolio();
+
         portfolio.update(reqDto.getUrl(), reqDto.getName());
         portfolioRepository.save(portfolio);
     }

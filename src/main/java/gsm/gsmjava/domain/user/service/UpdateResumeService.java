@@ -20,7 +20,10 @@ public class UpdateResumeService {
     public void update(ResumeReqDto reqDto) {
         User currentUser = userUtil.getCurrentUser();
 
-        Resume resume = currentUser.getResume();
+        Resume resume = currentUser.getResume() == null
+                ? Resume.builder().build()
+                : currentUser.getResume();
+
         resume.update(reqDto.getUrl(), reqDto.getName());
         resumeRepository.save(resume);
     }

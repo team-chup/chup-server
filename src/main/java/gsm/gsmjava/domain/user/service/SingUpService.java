@@ -28,18 +28,22 @@ public class SingUpService {
         currentUser.signup(reqDto);
         User updatedUser = userRepository.save(currentUser);
 
-        Resume resume = Resume.builder()
-                .user(updatedUser)
-                .name(reqDto.getResume().getName())
-                .url(reqDto.getResume().getUrl())
-                .build();
+        Resume resume = (reqDto.getResume() == null)
+                ? null
+                : Resume.builder()
+                    .user(updatedUser)
+                    .name(reqDto.getResume().getName())
+                    .url(reqDto.getResume().getUrl())
+                    .build();
         resumeRepository.save(resume);
 
-        Portfolio portfolio = Portfolio.builder()
-                .user(updatedUser)
-                .name(reqDto.getPortfolio().getName())
-                .url(reqDto.getPortfolio().getUrl())
-                .build();
+        Portfolio portfolio = (reqDto.getPortfolio() == null)
+                ? null
+                : Portfolio.builder()
+                    .user(updatedUser)
+                    .name(reqDto.getPortfolio().getName())
+                    .url(reqDto.getPortfolio().getUrl())
+                    .build();
         portfolioRepository.save(portfolio);
     }
 

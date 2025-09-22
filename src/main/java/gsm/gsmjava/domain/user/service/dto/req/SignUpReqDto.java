@@ -18,8 +18,7 @@ public class SignUpReqDto {
     private String studentNumber;
     @NotBlank
     private String phoneNumber;
-    @NotNull
+
     private ResumeReqDto resume;
-    @NotNull
     private PortfolioReqDto portfolio;
 }

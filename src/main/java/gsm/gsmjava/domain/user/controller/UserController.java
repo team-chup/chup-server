@@ -1,10 +1,8 @@
 package gsm.gsmjava.domain.user.controller;
 
+import gsm.gsmjava.domain.portfolio.service.dto.req.PortfolioReqDto;
 import gsm.gsmjava.domain.resume.service.dto.req.ResumeReqDto;
-import gsm.gsmjava.domain.user.service.SingUpService;
-import gsm.gsmjava.domain.user.service.UpdateInfoService;
-import gsm.gsmjava.domain.user.service.UpdateResumeService;
-import gsm.gsmjava.domain.user.service.UserInfoService;
+import gsm.gsmjava.domain.user.service.*;
 import gsm.gsmjava.domain.user.service.dto.req.SignUpReqDto;
 import gsm.gsmjava.domain.user.service.dto.req.UpdateInfoReqDto;
 import gsm.gsmjava.domain.user.service.dto.res.UserInfoResDto;
@@ -22,6 +20,7 @@ public class UserController {
     private final UpdateInfoService updateInfoService;
     private final UpdateResumeService updateResumeService;
     private final UserInfoService userInfoService;
+    private final UpdatePortfolioService updatePortfolioService;
 
     @PostMapping("/signup")
     public ResponseEntity<Void> singUp(
@@ -50,6 +49,14 @@ public class UserController {
             @RequestBody @Valid ResumeReqDto reqDto
     ) {
         updateResumeService.update(reqDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/me/portfolio")
+    public ResponseEntity<Void> updatePortfolio(
+            @RequestBody @Valid PortfolioReqDto reqDto
+    ) {
+        updatePortfolioService.update(reqDto);
         return ResponseEntity.ok().build();
     }
 

@@ -1,5 +1,6 @@
 package gsm.gsmjava.domain.user.service.dto.req;
 
+import gsm.gsmjava.domain.portfolio.service.dto.req.PortfolioReqDto;
 import gsm.gsmjava.domain.resume.service.dto.req.ResumeReqDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,6 +18,7 @@ public class SignUpReqDto {
     private String studentNumber;
     @NotBlank
     private String phoneNumber;
-    @NotNull
+
     private ResumeReqDto resume;
+    private PortfolioReqDto portfolio;
 }

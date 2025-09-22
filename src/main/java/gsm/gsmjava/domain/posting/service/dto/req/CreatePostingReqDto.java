@@ -4,8 +4,6 @@ import gsm.gsmjava.domain.posting.type.CompanyLocation;
 import gsm.gsmjava.domain.posting.type.EmploymentType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,19 +24,7 @@ public class CreatePostingReqDto {
     @NotNull
     private List<Long> positions;
     @NotNull
-    private List<PostingFile> files;
-    @NotNull
     private LocalDateTime startAt;
     @NotNull
     private LocalDateTime endAt;
-
-    @Getter
-    @Builder
-    @AllArgsConstructor
-    public static class PostingFile {
-        @NotBlank
-        private String name;
-        @NotBlank
-        private String url;
-    }
 }

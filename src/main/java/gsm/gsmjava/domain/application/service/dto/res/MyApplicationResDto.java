@@ -5,7 +5,6 @@ import gsm.gsmjava.domain.application.type.ApplicationStatus;
 import gsm.gsmjava.domain.applicationresult.type.ApplicationResultStatus;
 import gsm.gsmjava.domain.posting.type.CompanyLocation;
 import gsm.gsmjava.domain.posting.type.EmploymentType;
-import gsm.gsmjava.domain.resume.type.ResumeType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,6 +31,7 @@ public class MyApplicationResDto {
         private PositionDto position;
         private ApplicationStatus status;
         private ResumeDto resume;
+        private PortfolioDto portfolio;
         private ResultDto result;
         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime createdAt;
@@ -47,7 +47,14 @@ public class MyApplicationResDto {
     public static class ResumeDto {
         private String name;
         private String url;
-        private ResumeType type;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class PortfolioDto {
+        private String name;
+        private String url;
     }
 
     @Getter

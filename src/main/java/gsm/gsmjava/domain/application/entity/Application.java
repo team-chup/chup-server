@@ -4,7 +4,6 @@ import gsm.gsmjava.domain.application.type.ApplicationStatus;
 import gsm.gsmjava.domain.applicationresult.entity.ApplicationResult;
 import gsm.gsmjava.domain.position.entity.Position;
 import gsm.gsmjava.domain.posting.entity.Posting;
-import gsm.gsmjava.domain.resume.type.ResumeType;
 import gsm.gsmjava.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -47,12 +46,13 @@ public class Application {
 
     private String applicantStudentNumber;
 
-    @Enumerated(EnumType.STRING)
-    private ResumeType applicantResumeType;
-
     private String applicantResumeUrl;
 
     private String applicantResumeName;
+
+    private String applicantPortfolioUrl;
+
+    private String applicantPortfolioName;
 
     @Enumerated(EnumType.STRING)
     private ApplicationStatus applicantStatus;

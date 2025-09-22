@@ -1,5 +1,7 @@
 package gsm.gsmjava.domain.user.service;
 
+import gsm.gsmjava.domain.portfolio.entity.Portfolio;
+import gsm.gsmjava.domain.portfolio.repository.PortfolioRepository;
 import gsm.gsmjava.domain.resume.entity.Resume;
 import gsm.gsmjava.domain.resume.repository.ResumeRepository;
 import gsm.gsmjava.domain.user.entity.User;
@@ -17,6 +19,7 @@ public class SingUpService {
     private final UserRepository userRepository;
     private final ResumeRepository resumeRepository;
     private final UserUtil userUtil;
+    private final PortfolioRepository portfolioRepository;
 
     @Transactional
     public void signup(SignUpReqDto reqDto) {
@@ -25,13 +28,23 @@ public class SingUpService {
         currentUser.signup(reqDto);
         User updatedUser = userRepository.save(currentUser);
 
-        Resume resume = Resume.builder()
-                .user(updatedUser)
-                .name(reqDto.getResume().getName())
-                .type(reqDto.getResume().getType())
-                .url(reqDto.getResume().getUrl())
-                .build();
+        Resume resume = (reqDto.getResume() == null)
+                ? null
+                : Resume.builder()
+                    .user(updatedUser)
+                    .name(reqDto.getResume().getName())
+                    .url(reqDto.getResume().getUrl())
+                    .build();
         resumeRepository.save(resume);
+
+        Portfolio portfolio = (reqDto.getPortfolio() == null)
+                ? null
+                : Portfolio.builder()
+                    .user(updatedUser)
+                    .name(reqDto.getPortfolio().getName())
+                    .url(reqDto.getPortfolio().getUrl())
+                    .build();
+        portfolioRepository.save(portfolio);
     }
 
 }

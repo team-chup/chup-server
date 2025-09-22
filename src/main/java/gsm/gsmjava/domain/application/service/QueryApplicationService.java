@@ -19,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static gsm.gsmjava.domain.application.service.dto.res.MyApplicationResDto.*;
+
 @Service
 @RequiredArgsConstructor
 public class QueryApplicationService {
@@ -47,7 +49,10 @@ public class QueryApplicationService {
                 .resume(ResumeDto.builder()
                         .name(application.getApplicantResumeName())
                         .url(application.getApplicantResumeUrl())
-                        .type(application.getApplicantResumeType())
+                        .build())
+                .portfolio(PortfolioDto.builder()
+                        .name(application.getApplicantPortfolioName())
+                        .url(application.getApplicantPortfolioUrl())
                         .build())
                 .status(application.getApplicantStatus())
                 .result(application.getApplicationResult() == null ? null : ResultDto.builder()

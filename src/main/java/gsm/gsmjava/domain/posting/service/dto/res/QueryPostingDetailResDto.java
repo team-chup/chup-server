@@ -1,8 +1,6 @@
 package gsm.gsmjava.domain.posting.service.dto.res;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import gsm.gsmjava.domain.posting.service.dto.req.CreatePostingReqDto;
-import gsm.gsmjava.domain.posting.service.dto.req.CreatePostingReqDto.PostingFile;
 import gsm.gsmjava.domain.posting.type.CompanyLocation;
 import gsm.gsmjava.domain.posting.type.EmploymentType;
 import lombok.AllArgsConstructor;
@@ -26,7 +24,6 @@ public class QueryPostingDetailResDto {
     private CompanyLocation companyLocation;
     private EmploymentType employmentType;
     private List<PositionDto> positions;
-    private List<PostingFile> files;
     private Integer applicationCount;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt;

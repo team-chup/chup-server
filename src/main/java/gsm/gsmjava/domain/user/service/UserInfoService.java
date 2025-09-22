@@ -1,5 +1,7 @@
 package gsm.gsmjava.domain.user.service;
 
+import gsm.gsmjava.domain.portfolio.entity.Portfolio;
+import gsm.gsmjava.domain.portfolio.service.dto.req.PortfolioReqDto;
 import gsm.gsmjava.domain.resume.entity.Resume;
 import gsm.gsmjava.domain.resume.service.dto.req.ResumeReqDto;
 import gsm.gsmjava.domain.user.entity.User;
@@ -19,6 +21,7 @@ public class UserInfoService {
     public UserInfoResDto getInfo() {
         User currentUser = userUtil.getCurrentUser();
         Resume resume = currentUser.getResume();
+        Portfolio portfolio = currentUser.getPortfolio();
         return UserInfoResDto.builder()
                 .name(currentUser.getName())
                 .email(currentUser.getEmail())
@@ -28,9 +31,15 @@ public class UserInfoService {
                 .resume(
                         resume == null ? null :
                         ResumeReqDto.builder()
-                            .type(resume.getType())
                             .url(resume.getUrl())
                             .name(resume.getName())
+                            .build()
+                )
+                .portfolio(
+                        portfolio == null ? null :
+                        PortfolioReqDto.builder()
+                            .url(portfolio.getUrl())
+                            .name(portfolio.getName())
                             .build()
                 )
                 .build();

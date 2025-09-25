@@ -4,8 +4,10 @@ import gsm.gsmjava.domain.resume.entity.Resume;
 import gsm.gsmjava.domain.resume.repository.ResumeRepository;
 import gsm.gsmjava.domain.resume.service.dto.req.ResumeReqDto;
 import gsm.gsmjava.domain.user.entity.User;
+import gsm.gsmjava.global.error.ExpectedException;
 import gsm.gsmjava.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +30,16 @@ public class UpdateResumeService {
         resumeRepository.save(resume);
     }
 
+    @Transactional
     public void delete() {
         User currentUser = userUtil.getCurrentUser();
-        resumeRepository.deleteById(currentUser.getResume().getId());
+
+        Resume resume = currentUser.getResume();
+
+        if (resume == null) {
+            throw new ExpectedException("삭제할 이력서가 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
+        }
+
+        resumeRepository.deleteById(resume.getId());
     }
 }

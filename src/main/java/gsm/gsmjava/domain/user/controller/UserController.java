@@ -60,4 +60,16 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/me/resume")
+    public ResponseEntity<Void> deleteResume() {
+        updateResumeService.delete();
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/me/portfolio")
+    public ResponseEntity<Void> deletePortfolio() {
+        updatePortfolioService.delete();
+        return ResponseEntity.ok().build();
+    }
+
 }

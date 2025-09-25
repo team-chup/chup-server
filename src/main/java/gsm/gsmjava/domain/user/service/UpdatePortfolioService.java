@@ -28,4 +28,8 @@ public class UpdatePortfolioService {
         portfolioRepository.save(portfolio);
     }
 
+    public void delete() {
+        User currentUser = userUtil.getCurrentUser();
+        portfolioRepository.deleteById(currentUser.getPortfolio().getId());
+    }
 }

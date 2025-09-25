@@ -28,4 +28,8 @@ public class UpdateResumeService {
         resumeRepository.save(resume);
     }
 
+    public void delete() {
+        User currentUser = userUtil.getCurrentUser();
+        resumeRepository.deleteById(currentUser.getResume().getId());
+    }
 }
